@@ -1,0 +1,48 @@
+body{
+    background-color: lightskyblue;
+    margin:0;
+    padding:0;
+    overflow-x: hidden;
+}
+header{
+    background-color: linen;
+    padding:15px;
+    box-shadow: 0 0 3px black;
+
+}
+header li{
+    display:inline;
+    padding-left: 45px;
+
+}
+header a{
+    color:darkblue;
+    text-decoration: none;
+    padding:13px;
+    transition: .3s ease;
+
+}
+header li img{
+    width: 180px;
+    float: left;
+    margin-top: -20px;
+}
+header li a:hover{
+    
+    color:rosybrown
+}
+header ul #contact a{
+    color: silver;
+    background-color: skyblue;
+    border-radius: 30px;
+    float:right;
+    position:relative;
+    top: -15px;
+    transition: .3s ease;
+}
+header ul #contact a:hover{
+    background-color: goldenrod;
+}
+.active{
+    color: green;
+}
