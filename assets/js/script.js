@@ -1,7 +1,9 @@
 var input = document.querySelector("#input");
 var searchBtn = document.querySelector("#search");
-var stockSymbol = document.querySelector("#stocks-symbol");
-var stockPrice = document.querySelector("#stock-price");
+// var stockSymbol = document.querySelector("#stocks-symbol");
+// var stockPrice = document.querySelector("#stock-price");
+var stockInfo = document.querySelector("#stock-info");
+var stockNewsLinks = document.querySelector("#stock-news-links"); 
 
 var financeApiKey = "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d";
 
@@ -16,7 +18,10 @@ function getApi(symbol) {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
+
+           
             "x-rapidapi-key": `${financeApiKey}`,
+
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -27,17 +32,37 @@ function getApi(symbol) {
             console.log("Symbol Financials:");
             console.log(data);
 
-
+            stockInfo.innerHTML = "";
+            var fullSymbolName = document.createElement("span");            
+            fullSymbolName.textContent = `Symbol: ${data.quoteType.longName}`;
+            stockInfo.appendChild(fullSymbolName);
 
             var symbol = document.createElement("span");
-            symbol.textContent = data.symbol;
-            stockSymbol.innerHTML = "Symbol: ";
-            stockSymbol.append(symbol)
+            symbol.textContent = `Symbol: ${data.symbol}`;
+            stockInfo.appendChild(symbol);
 
             var price = document.createElement("span");
-            price.textContent = data.price.preMarketPrice.fmt;
-            stockPrice.innerHTML = "Price: ";
-            stockPrice.append(price);
+            price.textContent = `Price: ${data.price.regularMarketPrice.fmt}`;
+            stockInfo.appendChild(price);
+
+            var fifty2WeekHigh = document.createElement("span");
+            fifty2WeekHigh.textContent = `52 High: ${data.summaryDetail.fiftyTwoWeekHigh.raw}`;
+            stockInfo.appendChild(fifty2WeekHigh);
+
+            var fifty2WeekLow  = document.createElement("span");
+            fifty2WeekLow.textContent = `52 Low: ${data.summaryDetail.fiftyTwoWeekLow.raw}`;
+            stockInfo.appendChild(fifty2WeekLow);
+
+            var linkToYahoo  = document.createElement("a");
+            linkToYahoo.setAttribute("href", `https://finance.yahoo.com/quote/${data.symbol}`);
+            linkToYahoo.setAttribute("target", "_blank");
+            linkToYahoo.textContent = "Link to Yahoo";
+            stockInfo.appendChild(linkToYahoo);
+
+            var symbolSummary = document.createElement("span");
+            symbolSummary.textContent = `Summary: ${data.summaryProfile.longBusinessSummary}`
+            stockInfo.appendChild(symbolSummary);
+            
         })
         .catch(err => {
             console.error(err);
@@ -56,6 +81,7 @@ var articleContent = document.querySelector("#articles-content");
 //gets random stock news and automatically appears on page------------------------
 function getApiNews() {
 
+
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
         "method": "GET",
         "headers": {
@@ -63,6 +89,7 @@ function getApiNews() {
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
+
         .then(function (response) {
             return response.json();
         })
@@ -149,6 +176,9 @@ function getApiNews() {
         fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=${symbolArt}&region=US`, {
         "method": "GET",
         "headers": {
+
+            
+
             "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
