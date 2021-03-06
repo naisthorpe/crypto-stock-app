@@ -115,15 +115,15 @@ nav ul li:hover ul.sub-nav {
     background-size: 350% 350%;
     animation: waveColors 8s ease infinite;
     /* End Wave Color */
-    position: absolute;
+    /* position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     text-align: center;
-    margin: 0 auto;
+    margin: 0 auto; */
   }
   
-  .StreamsHero-header {
+  .hero-color {
     color: #fff;
     font-weight: 200;
     line-height: 48px;
