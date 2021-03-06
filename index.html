@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" style="min-height: 30%;">
         <nav>
             <ul>
                 <li class="menuitem"><a href="#bitcoin" style="text-decoration: none;color: inherit; ">
@@ -51,7 +51,7 @@
         </div>
     </div>
     <!--Search Box and History/Favorites  -->
-    <div class="columns">
+    <div class="columns" style="max-height: 70%;">
         <div class="column is-one-fifth">
             <nav class="panel">
                 <p class="panel-heading">
@@ -149,9 +149,14 @@
         </div>
         <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
         <div class="column is-four-fifths">
-            <div id="stock-outline"></div>
+            <div class="container">
+                <div id="stock-info" class="column has-background-grey is-flex is-flex-direction-column"></div> 
+                <div id="stock-news-links" class="column has-background-grey"></div>
+                <div id="reddit-stock-articles" class="column has-background-grey"></div>
+            </div>
+            <!-- <div id="stock-outline"></div>
             <div id="stocks-symbol"></div>
-                <div id="stock-price"></div>
+                <div id="stock-price"></div> -->
                 
             <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
             <div id="articles-content" class="is-justify-content-center"></div>
