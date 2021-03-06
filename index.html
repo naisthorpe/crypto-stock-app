@@ -12,157 +12,178 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav>
-            <ul>
-                <li class="menuitem"><a href="#bitcoin" style="text-decoration: none;color: inherit; ">
-                        <div class="menulink">Bitcoin Chart</div>
-                    </a></li>
-                <li class="menuitem"><a href="#stack-exchange" style="text-decoration: none; color: inherit;">
-                        <div class="menulink">StackExchange</div>
-                    </a></li>
-                <li class="menuitem"><a href="#reddit" style="text-decoration: none; color: inherit;">
-                        <div class="menulink">Reddit</div>
-                    </a></li>
+    <!-- Navbar -->
+    <nav class="navbar is-flex is-flex-wrap-wrap" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand is-full">
+            <a class="navbar-item">
+                Bitcoin Chart
+            </a>
+
+            <a class="navbar-item">
+                StackExchange
+            </a>
+
+            <a class="navbar-item">
+                Reddit
+            </a>
+
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                    More
+                </a>
+
+                <div class="navbar-dropdown">
+                    <a class="navbar-item">
+                        Home
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item">
+                        Cookies & Privacy
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item">
+                        Report an issue
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-body StreamsHero-image">
+            <p class="title has-text-white has-text-centered">
+                Platform where you can find cryptocurrency information and much more
+            </p>
+            <p class="subtitle has-text-white has-text-centered">
+                Keep track of your favorite pages and history
+            </p>
+        </div>
+    </section>
 
 
-                <li>More
-                    <ul class="sub-nav">
-                        <li class="menuitem"><a href="#home" style="text-decoration: none;color: inherit;">
-                                <div class="menulink">Home</div>
-                            </a></li>
-                        <li class="menuitem"><a href="#Cookies" style="text-decoration: none;color: inherit;">
-                                <div class="menulink">Cookies & Privacy</div>
-                            </a></li>
-                        <li class="menuitem"><a href="#report" style="text-decoration: none;color: inherit;">
-                                <div class="menulink">Report an issue</div>
-                            </a></li>
 
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+    <!--Search Box and History/Favorites  -->
+    <div class="column">
 
-        <div class="StreamsHero-image">
-            <div class="StreamsHero-content">
-                <h2 class="StreamsHero-header">Platform where you can find cryptocurrency information and much more</h2>
-                <p class="StreamsHero-blurb">Keep track of your favorite pages and history</p>
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <nav class="panel">
+                    <p class="panel-heading">
+                        Search Stocks
+                    </p>
+                    <div class="panel-block">
+                        <p class="control has-icons-left">
+                            <input id="input" class="input" type="text" placeholder="Search">
+                            <span class="icon is-left">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </p>
+                        <button id="search">Search</button>
+                    </div>
+
+                    <p class="panel-tabs">
+                        <a class="is-active">Favorites</a>
+                        <a>History</a>
+
+                    </p>
+                    <a class="panel-block is-active">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-code-branch" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-code-branch" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-book" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-code-branch" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-code-branch" aria-hidden="true"></i>
+                        </span>
+
+                    </a>
+
+                    <div class="panel-block">
+                        <button class="button is-link is-outlined is-fullwidth">
+                            Clear History
+                        </button>
+                    </div>
+                </nav>
+
+            </div>
+            <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
+            <div class="column is-four-fifths">
+                <div id="stock-outline"></div>
+                <div id="stocks-symbol"></div>
+                <div id="stock-price"></div>
+
+                <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
+                <div id="articles-content" class="is-justify-content-center"></div>
+
             </div>
         </div>
     </div>
-    <!--Search Box and History/Favorites  -->
-    <div class="columns">
-        <div class="column is-one-fifth">
-            <nav class="panel">
-                <p class="panel-heading">
-                    Search Stocks
-                </p>
-                <div class="panel-block">
-                    <p class="control has-icons-left">
-                        <input id="input" class="input" type="text" placeholder="Search">
-                        <span class="icon is-left">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                        </span>
-                    </p>
-                    <button id="search">Search</button>
-                </div>
+    
 
-                <p class="panel-tabs">
-                    <a class="is-active">Favorites</a>
-                    <a>History</a>
-
-                </p>
-                <a class="panel-block is-active">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-
-                <div class="panel-block">
-                    <button class="button is-link is-outlined is-fullwidth">
-                        Clear History
-                    </button>
-                </div>
-            </nav>
-
-        </div>
-        <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
-        <div class="column is-four-fifths">
-            <div id="stock-outline"></div>
-            <div id="stocks-symbol"></div>
-                <div id="stock-price"></div>
-                
-            <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
-            <div id="articles-content" class="is-justify-content-center"></div>
-            
-        </div>
 
 
 
 
 
     </div>
+
     <script src="./assets/js/script.js"></script>
 
 
