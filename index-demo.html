@@ -64,7 +64,7 @@
             </p>
         </div>
     </section>
-
+    <!--Search Box and History/Favorites  -->
     <div class="columns">
         <div class="column is-one-fifth">
             <nav class="panel">
@@ -73,12 +73,14 @@
                 </p>
                 <div class="panel-block">
                     <p class="control has-icons-left">
-                        <input class="input" type="text" placeholder="Search">
+                        <input id="input" class="input" type="text" placeholder="Search">
                         <span class="icon is-left">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
                     </p>
+                    <button id="search">Search</button>
                 </div>
+
                 <p class="panel-tabs">
                     <a class="is-active">Favorites</a>
                     <a>History</a>
@@ -150,7 +152,7 @@
                     </span>
 
                 </a>
-                
+
                 <div class="panel-block">
                     <button class="button is-link is-outlined is-fullwidth">
                         Clear History
@@ -159,14 +161,23 @@
             </nav>
 
         </div>
+        <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
         <div class="column is-four-fifths">
-            <div class="has-text-centered is-size-1">Stock Articles</div>
+            <div id="stock-outline"></div>
+            <div id="stocks-symbol"></div>
+                <div id="stock-price"></div>
+                
+            <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
+            <div id="articles-content" class="is-justify-content-center"></div>
             
-
         </div>
 
-    </div>
 
+
+
+
+    </div>
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
