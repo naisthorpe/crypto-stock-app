@@ -5,6 +5,8 @@ var searchBtn = document.querySelector("#search");
 var stockInfo = document.querySelector("#stock-info");
 var stockNewsLinks = document.querySelector("#stock-news-links"); 
 
+var financeApiKey = "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d";
+
 getApiNews();
 
 //-------------------------------------link search to articles by symbol or label-------------------------------------------------------------------------------
@@ -16,7 +18,10 @@ function getApi(symbol) {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d",
+
+           
+            "x-rapidapi-key": `${financeApiKey}`,
+
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -76,13 +81,15 @@ var articleContent = document.querySelector("#articles-content");
 //gets random stock news and automatically appears on page------------------------
 function getApiNews() {
 
-    fetch("https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d",
-		"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
-	}
-})
+
+    fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": `${financeApiKey}`,
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+        }
+    })
+
         .then(function (response) {
             return response.json();
         })
@@ -169,7 +176,10 @@ function getApiNews() {
         fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=${symbolArt}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d",
+
+            
+
+            "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
