@@ -4,6 +4,16 @@
   padding: 0;
 }
 
+body, html {
+  height: 100vh;
+}
+
+
+
+.hide {
+  display: none;
+}
+
 body {
   background: #fff;
   font-family: "Open Sans", sans-serif;
