@@ -3,6 +3,8 @@ var searchBtn = document.querySelector("#search");
 var stockSymbol = document.querySelector("#stocks-symbol");
 var stockPrice = document.querySelector("#stock-price");
 
+var financeApiKey = "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d";
+
 getApiNews();
 
 //-------------------------------------link search to articles by symbol or label-------------------------------------------------------------------------------
@@ -14,7 +16,7 @@ function getApi(symbol) {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "c7f7913aefmshfb875d8654b69e0p11a749jsnb4da5469d63a",
+            "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -57,7 +59,7 @@ function getApiNews() {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "c7f7913aefmshfb875d8654b69e0p11a749jsnb4da5469d63a",
+            "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -147,7 +149,7 @@ function getApiNews() {
         fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=${symbolArt}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "c7f7913aefmshfb875d8654b69e0p11a749jsnb4da5469d63a",
+            "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
