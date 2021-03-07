@@ -13,7 +13,6 @@
 
 <body>
 
-
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand is-full grey">
@@ -55,6 +54,7 @@
                         Report an issue
                     </a>
                 </div>
+
             </div>
             
         </div>
@@ -75,7 +75,7 @@
 
 
     <!--Search Box and History/Favorites  -->
-    <div class="column">
+
 
         <div class="columns">
             <div class="column is-one-fifth">
@@ -172,17 +172,22 @@
                     </div>
                 </nav>
 
-            </div>
-            <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
-            <div class="column is-four-fifths">
-                <div id="stock-outline"></div>
-                <div id="stocks-symbol"></div>
-                <div id="stock-price"></div>
 
-                <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
-                <div id="articles-content" class="is-justify-content-center"></div>
-
+        </div>
+        <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
+        <div class="column is-four-fifths">
+            <div class="container">
+                <div id="stock-info" class="column has-background-grey is-flex is-flex-direction-column"></div> 
+                <div id="stock-news-links" class="column has-background-grey"></div>
+                <div id="reddit-stock-articles" class="column has-background-grey"></div>
             </div>
+            <!-- <div id="stock-outline"></div>
+            <div id="stocks-symbol"></div>
+                <div id="stock-price"></div> -->
+                
+            <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
+            <div id="articles-content" class="is-justify-content-center"></div>
+            
         </div>
     </div>
 
