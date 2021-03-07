@@ -49,7 +49,6 @@ function getApi(symbol) {
         "method": "GET",
         "headers": {
 
-           
             "x-rapidapi-key": `${financeApiKey}`,
 
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
@@ -237,14 +236,40 @@ function getRedditApi() {
 
 }
 
+var searchHistoryEl = document.getElementById("")
 
+function renderStockHistory() {
+    //searchHistoryEl.empty();
 
+    for (var i=0; i<stockSymbolArray.length; i++) {
+        var searchHistoryItem = document.querySelector(".panel-icon");
+        searchHistoryItem.setAttribute("data-index", [i]);
+        searchHistoryItem.append(stockSymbolArray[i]);
+        console.log(stockSymbolArray[i]);
+    }
+}
+
+var stockSymbolArray = JSON.parse(window.localStorage.getItem("stock-symbols")) || ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
+var searchStock;
 
 searchBtn.addEventListener("click", searchClickHandler);
 
 function searchClickHandler() {
-    var searchStock = input.value;
+    searchStock = input.value;
     articleContent.classList.add("hide");
+    if (searchStock === ""){
+        return;
+    }
+
+    stockSymbolArray.unshift(searchStock);
+
     getApi(searchStock);
     apiSymbolArticle(searchStock);
 }
+
+
+function init() {
+    renderStockHistory();
+}
+
+init();
