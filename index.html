@@ -14,42 +14,50 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar is-flex is-flex-wrap-wrap" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand is-full">
-            <a class="navbar-item">
-                Bitcoin Chart
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand is-full grey">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://static.thenounproject.com/png/136700-200.png" width="30" height="28">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" id="nav-toggle">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="nav-menu" class="navbar-menu grey">
+            <a class="navbar-item has-text-black">
+                Home
+            </a>
+            <a class="navbar-item has-text-black">
+                Yahoo Finance
+            </a>
+            <a class="navbar-item has-text-black">
+                Bitcoin
             </a>
 
-            <a class="navbar-item">
-                StackExchange
-            </a>
-
-            <a class="navbar-item">
+            <a class="navbar-item has-text-black">
                 Reddit
             </a>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
+            <div id="nav-more" class="navbar-item has-text-black has-dropdown is-hoverable">
+                <a class="navbar-link has-text-black">
                     More
                 </a>
 
-                <div class="navbar-dropdown">
-                    <a class="navbar-item">
-                        Home
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item">
+                <div class="navbar-dropdown is-hidden" id="nav-dropdown">
+                    <a class="navbar-item has-text-black">
                         Cookies & Privacy
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item">
+                    <a class="navbar-item has-text-black">
                         Report an issue
                     </a>
                 </div>
 
             </div>
+            
         </div>
-
     </nav>
 
     <!-- Hero Banner -->
@@ -182,7 +190,7 @@
             
         </div>
     </div>
-    
+
 
 
 

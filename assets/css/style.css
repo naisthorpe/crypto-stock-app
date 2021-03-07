@@ -133,6 +133,10 @@ nav ul li:hover ul.sub-nav {
     text-align: center;
     margin: 0 auto; */
   }
+
+  .grey {
+    background-color: grey;
+  }
   
   .hero-color {
     color: #fff;
