@@ -14,7 +14,7 @@ function getApi(symbol) {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "c7f7913aefmshfb875d8654b69e0p11a749jsnb4da5469d63a",
+            "x-rapidapi-key": "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -57,7 +57,7 @@ function getApiNews() {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "c7f7913aefmshfb875d8654b69e0p11a749jsnb4da5469d63a",
+            "x-rapidapi-key": "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -129,25 +129,25 @@ function getApiNews() {
                 showMoreButton.textContent = "Read Article"
                 showMoreButton.setAttribute('id', 'show-more-' + i)
                 cardHeader.appendChild(showMoreButton);
-                
+
                 // showMoreButton.addEventListener("click", function (event) {
                 //     console.log('MORE BUTTON', event.target)
                 //     infoCard.classList.remove("hide");
                 // })               
-            }           
+            }
         })
         .catch(err => {
             console.error(err);
         });
-    }
-    
-    
-    //has stock symbol and can access news relating-----------------------------------
-    function apiSymbolArticle(symbolArt) {
-        fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=${symbolArt}&region=US`, {
+}
+
+
+//has stock symbol and can access news relating-----------------------------------
+function apiSymbolArticle(symbolArt) {
+    fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=${symbolArt}&region=US`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "c7f7913aefmshfb875d8654b69e0p11a749jsnb4da5469d63a",
+            "x-rapidapi-key": "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d",
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
