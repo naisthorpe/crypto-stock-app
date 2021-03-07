@@ -56,7 +56,7 @@
                 </div>
 
             </div>
-            
+
         </div>
     </nav>
 
@@ -76,13 +76,20 @@
 
     <!--Search Box and History/Favorites  -->
 
-
-        <div class="columns">
-            <div class="column is-one-fifth">
-                <nav class="panel">
-                    <p class="panel-heading">
-                        Search Stocks
+    <div class="columns">
+        <div class="column is-one-fifth">
+            <nav class="panel">
+                <p class="panel-heading">
+                    Search Stocks
+                </p>
+                <div class="panel-block">
+                    <p class="control has-icons-left">
+                        <input id="input" class="input" type="text" placeholder="Search">
+                        <span class="icon is-left">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </span>
                     </p>
+<<<<<<< HEAD
                     <div class="panel-block">
                         <p class="control has-icons-left">
                             <input id="input" class="input" type="text" placeholder="Search">
@@ -132,72 +139,141 @@
                         <span class="panel-icon">
                             <i class="fas fas fa-caret-right" aria-hidden="true"></i>
                         </span>
+=======
+                    <button id="search">Search</button>
+                </div>
 
-                    </a>
-                    <a class="panel-block">
-                        <span class="panel-icon">
-                            <i class="fas fa-caret-right" aria-hidden="true"></i>
-                        </span>
+                <p class="panel-tabs">
+                    <a class="is-active">History</a>
+                    <a>Favorites</a>
+>>>>>>> 55b89e8306e0d32a32ab3e1aec9b58a5613197bc
 
-                    </a>
-                    <a class="panel-block">
-                        <span class="panel-icon">
-                            <i class="fas fa-caret-right" aria-hidden="true"></i>
-                        </span>
+                </p>
+                <a class="panel-block is-active">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                    GME
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                    TSLA
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                    F
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                    GM
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+                    SPCE
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
 
-                    </a>
-                    <a class="panel-block">
-                        <span class="panel-icon">
-                            <i class="fas fa-caret-right" aria-hidden="true"></i>
-                        </span>
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
 
-                    </a>
-                    <a class="panel-block">
-                        <span class="panel-icon">
-                            <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                        </span>
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
 
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+
+<<<<<<< HEAD
                     </a>
                     
+=======
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
 
-                    <div class="panel-block">
-                        <button class="button is-link is-outlined is-fullwidth">
-                            Clear History
-                        </button>
-                    </div>
-                </nav>
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                    </span>
+
+
+                </a>
+>>>>>>> 55b89e8306e0d32a32ab3e1aec9b58a5613197bc
+
+                <div class="panel-block">
+                    <button class="button is-link is-outlined is-fullwidth">
+                        Clear History
+                    </button>
+                </div>
+            </nav>
 
 
         </div>
         <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
         <div class="column is-four-fifths">
-            <div class="columns" style="margin-top: 100px;">
-                <div id="stock-title" class="column is-full">Stock Title</div>
-                <div id="stock-info" class="columns has-background-grey is-flex is-flex-direction-column"></div> 
+            <div class="container hide" id="stock-container">
 
-                <div id="stock-news-links" class="column has-background-grey is-flex is-flex-direction-row">
-                    <div id="article-picture" class="is-one-fifth"></div>
-                    <div id="article-href-links" class="is-four-fifths"></div>                    
+                <div id="stock-info" class="column has-background-grey is-flex is-flex-direction-column"
+                    style="margin-left: 100px; margin-top: 100px; margin-right: 100px;">
                 </div>
 
-                <div id="reddit-stock-articles" class="column has-background-grey">
+                <div id="stock-news-links" class="column has-background-grey is-flex is-flex-direction-row" style="margin-left: 100px; margin-top: 100px; margin-right: 100px;">
+                    <div id="article-picture" class="is-one-fifth"></div>
+                    <div id="article-href-links" class="is-four-fifths"></div>
+                </div>
+
+                <div id="reddit-stock-articles" class="column has-background-grey"
+                    style="margin-left: 100px; margin-top: 100px; margin-right: 100px;">
 
                 </div>
             </div>
             <!-- <div id="stock-outline"></div>
             <div id="stocks-symbol"></div>
                 <div id="stock-price"></div> -->
-                
+
             <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
             <div id="articles-content" class="is-justify-content-center"></div>
-            
+
+        </div>
+    </div>
+
+    <div class="modal" >
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">                
+                <button class="delete" id="cancel-button" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body"></section>
         </div>
     </div>
 
 
 
 
-
+    <a href="https://www.uplead.com/?_ga=2.20266360.1914784608.1615136862-1413120390.1615136862" target="_blank"
+        rel="noopener noreferrer">Logos provided by UpLead</a>
 
 
     </div>

@@ -1,21 +1,16 @@
 var input = document.querySelector("#input");
 var searchBtn = document.querySelector("#search");
-// var stockSymbol = document.querySelector("#stocks-symbol");
-// var stockPrice = document.querySelector("#stock-price");
 var stockInfo = document.querySelector("#stock-info");
-var stockNewsLinks = document.querySelector("#stock-news-links"); 
-var articlePicture = document.querySelector("#article-picture");
-var articleHrefLinks = document.querySelector("#article-href-links");
 
 
-var financeApiKey = "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d";
+var financeApiKey = "5004e1234cmsh1f18c0a8ad98401p1c816cjsnae813c0d6cf1";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
 
-toggle.addEventListener("click", function() {
+toggle.addEventListener("click", function () {
     // If the menu is showing
     if (menu.classList.contains("is-active")) {
         menu.classList.remove("is-active");
@@ -27,7 +22,7 @@ toggle.addEventListener("click", function() {
     }
 })
 
-moreBtn.addEventListener("click", function() {
+moreBtn.addEventListener("click", function () {
     // if the dropdown is not showing
     if (moreDropdown.classList.contains("is-hidden")) {
         moreDropdown.classList.remove("is-hidden");
@@ -62,7 +57,14 @@ function getApi(symbol) {
             console.log(data);
 
             stockInfo.innerHTML = "";
-            var fullSymbolName = document.createElement("span");            
+
+            var stockLogo = document.createElement("img");
+            console.log(data.summaryProfile.website.split("http://www."))
+            stockLogo.setAttribute("src", `https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}`);
+            stockLogo.setAttribute("width", 100);
+            stockInfo.appendChild(stockLogo);
+
+            var fullSymbolName = document.createElement("span");
             fullSymbolName.textContent = `Symbol: ${data.quoteType.longName}`;
             stockInfo.appendChild(fullSymbolName);
 
@@ -78,11 +80,14 @@ function getApi(symbol) {
             fifty2WeekHigh.textContent = `52 High: ${data.summaryDetail.fiftyTwoWeekHigh.raw}`;
             stockInfo.appendChild(fifty2WeekHigh);
 
-            var fifty2WeekLow  = document.createElement("span");
+            var fifty2WeekLow = document.createElement("span");
             fifty2WeekLow.textContent = `52 Low: ${data.summaryDetail.fiftyTwoWeekLow.raw}`;
             stockInfo.appendChild(fifty2WeekLow);
 
-            var linkToYahoo  = document.createElement("a");
+
+
+
+            var linkToYahoo = document.createElement("a");
             linkToYahoo.setAttribute("href", `https://finance.yahoo.com/quote/${data.symbol}`);
             linkToYahoo.setAttribute("target", "_blank");
             linkToYahoo.textContent = "Link to Yahoo: " + data.symbol;
@@ -94,11 +99,13 @@ function getApi(symbol) {
 
             // -----------------------------------------------------------------------
 
+
+
             // for (var i = 0; i < data.news.length; i++) {
             //     var stockArtImg = document.createElement("img");
             //     
             // }
-           
+
         })
         .catch(err => {
             console.error(err);
@@ -108,10 +115,7 @@ function getApi(symbol) {
 
 
 
-var stockArticles = document.querySelector("#stock-articles");
-var articleName = document.querySelector("#article-name");
-var articleAuthor = document.querySelector("#article-author");
-var articleLink = document.querySelector("#article-link");
+
 var articleContent = document.querySelector("#articles-content");
 
 //gets random stock news and automatically appears on page------------------------
@@ -175,8 +179,10 @@ function getApiNews() {
 
 
                 // card body will append to header
+                var modalBody = document.querySelector(".modal-card-body");
+
                 var infoCard = document.createElement("div");
-                infoCard.classList.add("card", "hide");
+                infoCard.classList.add("card");
 
                 var cardContent = document.createElement("div");
                 cardContent.classList.add("card-content");
@@ -188,34 +194,52 @@ function getApiNews() {
                 cardContent.appendChild(cardBody);
 
                 // append to page
-                cardHeadContainer.appendChild(infoCard);
+                modalBody.append(infoCard);
+                // cardHeadContainer.appendChild(infoCard);
                 articleContent.appendChild(cardHeadContainer);
+
 
                 var showMoreButton = document.createElement("button");
                 showMoreButton.textContent = "Read Article"
                 showMoreButton.setAttribute('id', 'show-more-' + i)
                 cardHeader.appendChild(showMoreButton);
-                
-                // showMoreButton.addEventListener("click", function (event) {
-                //     console.log('MORE BUTTON', event.target)
-                //     infoCard.classList.remove("hide");
-                // })               
-            }           
+
+                showMoreButton.addEventListener("click", function (event) {
+                    
+                    // var hi = this.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.children[1].children[1];
+                    // console.log("body of modal",hi);
+                    // hi = data.items.
+                    // modalBody.innerHTML = hi;
+                    // console.log(hi);
+
+                    document.querySelector(".modal").classList.add("is-active");
+
+                    
+                })
+                var cancelButton = document.querySelector("#cancel-button");
+
+                cancelButton.addEventListener("click", function (event) {
+                    document.querySelector(".modal").classList.remove("is-active");
+
+                })
+            }
         })
         .catch(err => {
             console.error(err);
         });
-    }
-    
-    
-    //has stock symbol and can access news relating-----------------------------------
-    function apiSymbolArticle(symbolArt) {
-        fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=${symbolArt}&region=US`, {
+}
+
+
+var stockNewsLinks = document.querySelector("#stock-news-links");
+var articlePicture = document.querySelector("#article-picture");
+var articleHrefLinks = document.querySelector("#article-href-links");
+
+
+//has stock symbol and can access news relating-----------------------------------
+function apiSymbolArticle(symbolArt) {
+    fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-news?category=${symbolArt}&region=US`, {
         "method": "GET",
-        "headers": {
-
-            
-
+        "headers": {            
             "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
@@ -226,6 +250,26 @@ function getApiNews() {
         .then(function (data) {
             console.log("Specific Symbol News:")
             console.log(data);
+
+            for(var i = 0 ; i < 5; i++){
+                articlePicture.innerHTML = "";
+                articleHrefLinks.innerHTML = "";
+                var specificStockArtImg = document.createElement("img");
+                
+                if(data.items.result[i].main_image === null) {
+                    specificStockArtImg.setAttribute("alt", "Stock News Image");
+                    specificStockArtImg.src = "https://image.freepik.com/free-photo/financial-stock-market-graph-chart-stock-market-investment-trading-screen_9693-990.jpg";
+                    specificStockArtImg.setAttribute("width", 100);
+                    articlePicture.appendChild(specificStockArtImg); 
+                } else {
+                    specificStockArtImg.src = data.items.result[i].main_image.original_url;
+                    specificStockArtImg.setAttribute("width", 100);
+                    articlePicture.appendChild(specificStockArtImg);                    
+                }
+                // var specificStockArtLink = document.createElement("div");
+                // specificStockArtLink.textContent = 
+            }
+
         })
         .catch(err => {
             console.error(err);
@@ -252,6 +296,7 @@ function renderStockHistory() {
 var stockSymbolArray = JSON.parse(window.localStorage.getItem("stock-symbols")) || ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
 var searchStock;
 
+var stockContainer = document.querySelector("#stock-container");
 searchBtn.addEventListener("click", searchClickHandler);
 
 function searchClickHandler() {
@@ -263,6 +308,7 @@ function searchClickHandler() {
 
     stockSymbolArray.unshift(searchStock);
 
+    stockContainer.classList.remove("hide");
     getApi(searchStock);
     apiSymbolArticle(searchStock);
 }
