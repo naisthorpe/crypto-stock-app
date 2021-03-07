@@ -5,6 +5,33 @@ var stockPrice = document.querySelector("#stock-price");
 
 var financeApiKey = "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d";
 
+var toggle = document.querySelector("#nav-toggle");
+var menu = document.querySelector("#nav-menu");
+var moreBtn = document.querySelector("#nav-more");
+var moreDropdown = document.querySelector("#nav-dropdown");
+
+toggle.addEventListener("click", function() {
+    // If the menu is showing
+    if (menu.classList.contains("is-active")) {
+        menu.classList.remove("is-active");
+        toggle.classList.remove("is-active has-background-dark");
+    } else {
+        // if the menu is not showing
+        menu.classList.add("is-active");
+        toggle.classList.add("is-active has-background-dark");
+    }
+})
+
+moreBtn.addEventListener("click", function() {
+    // if the dropdown is not showing
+    if (moreDropdown.classList.contains("is-hidden")) {
+        moreDropdown.classList.remove("is-hidden");
+    } else {
+        // if the menu is showing
+        moreDropdown.classList.add("is-hidden");
+    }
+})
+
 getApiNews();
 
 //-------------------------------------link search to articles by symbol or label-------------------------------------------------------------------------------
