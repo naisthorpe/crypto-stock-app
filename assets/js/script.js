@@ -4,6 +4,9 @@ var searchBtn = document.querySelector("#search");
 // var stockPrice = document.querySelector("#stock-price");
 var stockInfo = document.querySelector("#stock-info");
 var stockNewsLinks = document.querySelector("#stock-news-links"); 
+var articlePicture = document.querySelector("#article-picture");
+var articleHrefLinks = document.querySelector("#article-href-links");
+
 
 var financeApiKey = "4a00cf8832msh0859ae98812ca8fp10d693jsn519ea8ffd89d";
 
@@ -83,13 +86,20 @@ function getApi(symbol) {
             var linkToYahoo  = document.createElement("a");
             linkToYahoo.setAttribute("href", `https://finance.yahoo.com/quote/${data.symbol}`);
             linkToYahoo.setAttribute("target", "_blank");
-            linkToYahoo.textContent = "Link to Yahoo";
+            linkToYahoo.textContent = "Link to Yahoo: " + data.symbol;
             stockInfo.appendChild(linkToYahoo);
 
             var symbolSummary = document.createElement("span");
             symbolSummary.textContent = `Summary: ${data.summaryProfile.longBusinessSummary}`
             stockInfo.appendChild(symbolSummary);
-            
+
+            // -----------------------------------------------------------------------
+
+            // for (var i = 0; i < data.news.length; i++) {
+            //     var stockArtImg = document.createElement("img");
+            //     
+            // }
+           
         })
         .catch(err => {
             console.error(err);
@@ -154,6 +164,7 @@ function getApiNews() {
                 var artImage = document.createElement("img");
 
                 if (data.items.result[i].main_image === null) {
+                    artImage.setAttribute("alt", "News Anchor");
                     artImage.src = "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-260nw-442698565.jpg";
                 } else {
                     // artImage.setAttribute("style", "max-height: 900px; max-width: 900px;")
@@ -236,5 +247,4 @@ function searchClickHandler() {
     articleContent.classList.add("hide");
     getApi(searchStock);
     apiSymbolArticle(searchStock);
-
 }
