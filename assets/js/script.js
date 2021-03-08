@@ -79,6 +79,7 @@ function getApi(symbol) {
 
             // Add stock image to figure
             var stockLogo = document.createElement("img");
+
             stockLogo.setAttribute("src", `https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}`);
             stockItemImgEl.append(stockLogo);
 
@@ -152,6 +153,7 @@ function apiSymbolArticle(symbolArt) {
             console.log(data);
             
 
+
             var newsContainerTitle = document.createElement("p");
             newsContainerTitle.setAttribute("class", "title mt-3");
             newsContainerTitle.textContent = "Relevant Yahoo Finance Articles";
@@ -180,6 +182,7 @@ function apiSymbolArticle(symbolArt) {
                     newsImg.setAttribute("alt", "Add image alt Text reference")
                     newsImg.src = data.items.result[i].main_image.original_url;
                 }
+
                 newsItemImgEl.appendChild(newsImg);
 
                 // Add Container for Title and Subtitle after Figure
@@ -224,7 +227,6 @@ function getRedditApi(symbolSearch) {
             var redditPostContainer = document.createElement("div");
             newsContent.appendChild(redditPostContainer);
 
-
             for (var i = 0; i < 5; i++) {
 
                 // Create container for news articles
@@ -262,9 +264,11 @@ function getRedditApi(symbolSearch) {
         })
 }
 
+
 //gets random stock news and automatically appears on page------------------------
 function getApiRandomNews() {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
+
         "method": "GET",
         "headers": {
             "x-rapidapi-key": `${financeApiKey}`,
@@ -306,6 +310,7 @@ function getApiRandomNews() {
                     newsImg.setAttribute("alt", "Add image alt Text reference")
                     newsImg.src = data.items.result[i].main_image.original_url;
                 }
+
                 newsItemImgEl.appendChild(newsImg);
 
                 // Add Container for Title and Subtitle after Figure
