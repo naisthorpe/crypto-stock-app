@@ -166,7 +166,7 @@ function getApiNews() {
                     newsImg.setAttribute("alt", "News Anchor");
                     newsImg.src = "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-260nw-442698565.jpg";
                 } else {
-                    newsImg.setAttribute("alt", "Add image alt Text reference")
+                    newsImg.setAttribute("alt", data.items.result[i].title);
                     newsImg.src = data.items.result[i].main_image.original_url;
                 }
                 newsItemImgEl.appendChild(newsImg);
@@ -190,6 +190,53 @@ function getApiNews() {
                     newsItemSubtitle.textContent = data.items.result[i].author;
                 }
                 newsItemContent.appendChild(newsItemSubtitle);
+
+                // Add read article button to specific news container
+                var showMoreButton = document.createElement("button");
+                showMoreButton.textContent = "Read Article"
+                showMoreButton.setAttribute('id', 'show-more-' + i)
+                newsItemContent.appendChild(showMoreButton);
+
+                showMoreButton.addEventListener("click", function (event) {
+
+                    document.querySelector(".modal").classList.add("is-active");
+                });
+                
+                // Modal setup goes here for article click
+                var modalBody = document.querySelector(".modal-card-body");
+
+                var infoCard = document.createElement("div");
+                infoCard.classList.add("card");
+
+                var cardContent = document.createElement("div");
+                cardContent.classList.add("card-content");
+                infoCard.appendChild(cardContent);
+
+                var cardBody = document.createElement("div");
+                cardBody.classList.add("content");
+                cardBody.innerHTML = data.items.result[i].content;
+                cardContent.appendChild(cardBody);
+
+                // append to page
+                modalBody.append(infoCard);
+                // cardHeadContainer.appendChild(infoCard);
+                newsContent.append(newsItemEl);
+
+                var cancelButton = document.querySelector("#cancel-button");
+
+                cancelButton.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    var element = event.target;
+                    if (element.matches("button")) {
+                        document.querySelector(".modal").classList.remove("is-active");
+                    }
+                    
+                })
+            };
+        })
+    }
+
+
 
                 //card header
                 /*
@@ -270,16 +317,21 @@ function getApiNews() {
 
                     document.querySelector(".modal").classList.add("is-active");
 
-                    */
+                    
                 }
+                
                 var cancelButton = document.querySelector("#cancel-button");
 
                 cancelButton.addEventListener("click", function (event) {
                     document.querySelector(".modal").classList.remove("is-active");
 
+                    
+
                 })
-            })
-        }
+                
+            }
+        })
+        */
         /*
         .catch(err => {
             console.error(err);
@@ -361,13 +413,13 @@ searchBtn.addEventListener("click", searchClickHandler);
 function searchClickHandler(event) {
     event.preventDefault();
     var searchStock = input.value;
-    articleContent.classList.add("hide");
+    // articleContent.classList.add("hide");
 
     if (searchStock === "") {
         return;
     }
 
-    stockContainer.classList.remove("hide");
+    //stockContainer.classList.remove("hide");
     input.value = "";
     getApi(searchStock);
     apiSymbolArticle(searchStock);
@@ -382,7 +434,7 @@ function clearHistory() {
 
 // Make history buttons run the getAPI function for given symbol
 function getHistoryItemInfo(event) {
-
+    event.preventDefault();
     var element = event.target;
     console.log(element);    
 
@@ -390,11 +442,11 @@ function getHistoryItemInfo(event) {
         var historyIndex = element.getAttribute("data-index");
         historySymbol = stockSymbolArray[historyIndex];
         
-        articleContent.classList.add("hide");
-        stockContainer.classList.remove("hide");        
+        // newsContent.classList.add("hide");
+        //stockContainer.classList.remove("hide");        
         
         getApi(historySymbol);
-        getApiNews(historySymbol);
+        apiSymbolArticle(historySymbol);
     }
 
     
