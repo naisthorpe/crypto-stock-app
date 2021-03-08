@@ -63,7 +63,8 @@ function getApi(symbol) {
             console.log("Symbol Financials:");
             console.log(data);
 
-            newsContent.innerHTML = "";              
+            newsContent.innerHTML = "";  
+
 
             // Create container for stock articles
             var stockItemEl = document.createElement("article");
@@ -278,7 +279,12 @@ function getApiRandomNews() {
             console.log("Random News:")
             console.log(data);
 
-            for (var i = 0; i < 5; i++) {
+            var newsContainerTitle = document.createElement("p");
+            newsContainerTitle.setAttribute("class", "title mt-3");
+            newsContainerTitle.textContent = "General Stock News";
+            newsContent.appendChild(newsContainerTitle);
+
+            for (var i = 0; i < data.items.result.length; i++) {
 
                 // Create container for news articles
                 var newsItemEl = document.createElement("article");
