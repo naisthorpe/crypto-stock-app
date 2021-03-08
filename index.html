@@ -77,97 +77,101 @@
     <!--Search Box and History/Favorites  -->
 
     <div class="columns">
-        <div class="column is-one-fifth">
+        <div class="column is-one-fifth m-5">
             <nav class="panel">
                 <p class="panel-heading">
                     Search Stocks
                 </p>
                 <div class="panel-block">
                     <p class="control has-icons-left">
-                        <input id="input" class="input" type="text" placeholder="Search">
+                        <input id="input" class="input" type="text" placeholder="Ex. GME">
                         <span class="icon is-left">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
                     </p>
+                    
                     <button id="search">Search</button>
+                    
                 </div>
+                <div id="search-history">
+                    <p class="panel-tabs">
+                        <a class="is-active">History</a>
+                        <a>Favorites</a>
 
-                <p class="panel-tabs">
-                    <a class="is-active">History</a>
-                    <a>Favorites</a>
+                    </p>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button  id="history-0" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-1" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                        
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-2" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                        
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-3" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                        
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-4" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                        
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-5" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
-                </p>
-                <a class="panel-block is-active">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-                    GME
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-                    TSLA
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-                    F
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-                    GM
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-                    SPCE
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-6" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-7" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-8" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
+                    </a>
+                    <a class="panel-block history-item-container">
+                        <span class="panel-icon">
+                            <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                        </span>
+                        <button id="history-9" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                    </span>
-
-
-                </a>
-
+                    </a>
+                </div>
                 <div class="panel-block">
-                    <button class="button is-link is-outlined is-fullwidth">
-                        Clear History
+                    <button id="clear-history-btn" class="button is-link is-outlined is-fullwidth">
+                        Clear Local History
                     </button>
                 </div>
             </nav>
