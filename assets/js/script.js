@@ -2,16 +2,19 @@ var input = document.querySelector("#input");
 var searchBtn = document.querySelector("#search");
 var stockInfo = document.querySelector("#stock-info");
 
+var newsContent = document.getElementById("content");
+
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "f2e83bae15msh3de8865564383bbp1b8df0";
+var financeApiKey = "f2e83bae15msh3de8865564383bbp1b8df0jsnf6f98996915b";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
 
+var stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
 var stockSymbol;
 
 toggle.addEventListener("click", function () {
@@ -36,7 +39,7 @@ moreBtn.addEventListener("click", function () {
     }
 })
 
-getApiNews();
+getApiRandomNews();
 
 //-------------------------------------link search to articles by symbol or label-------------------------------------------------------------------------------
 //-------------------------------------attach .entities[i].label or term----------------------------------------------------------------------------------------
@@ -60,79 +63,212 @@ function getApi(symbol) {
             console.log("Symbol Financials:");
             console.log(data);
 
-            stockInfo.innerHTML = "";
+            newsContent.innerHTML = "";  
 
+
+            // Create container for stock articles
+            var stockItemEl = document.createElement("article");
+            stockItemEl.classList.add("card", "columns", "mt-2", "mb-2");
+            //stockItemEl.setAttribute("data-index", i);
+            newsContent.appendChild(stockItemEl);
+
+            // Create figure for stock image
+            var stockItemImgEl = document.createElement("figure");
+            stockItemImgEl.classList.add("column", "is-3", "image", "is-align-content-center");
+            stockItemEl.appendChild(stockItemImgEl);
+
+            // Add stock image to figure
             var stockLogo = document.createElement("img");
-            // if (`https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}` === 404){
-            //     console.log("fuck off");
-            // }
+
             stockLogo.setAttribute("src", `https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}`);
-            stockLogo.setAttribute("width", 100);
-            stockInfo.appendChild(stockLogo);
+            stockItemImgEl.append(stockLogo);
 
-            var fullSymbolName = document.createElement("span");
-            fullSymbolName.textContent = `Symbol: ${data.quoteType.longName}`;
-            stockInfo.appendChild(fullSymbolName);
+            // Add container for stock info
+            var stockInfoEl = document.createElement("div");
+            stockInfoEl.setAttribute("class", "column is-9");
+            stockItemEl.append(stockInfoEl);
 
-            stockSymbol = document.createElement("span");
-            stockSymbol.textContent = `Symbol: ${data.symbol}`;
-            stockInfo.appendChild(stockSymbol);
+            // Add symbol full name 
+            var fullSymbolName = document.createElement("p");
+            fullSymbolName.textContent = `${data.quoteType.longName} (${data.symbol})`;
+            stockInfoEl.appendChild(fullSymbolName);
 
-            var price = document.createElement("span");
+            // Add stock price
+            var price = document.createElement("p");
             price.textContent = `Price: ${data.price.regularMarketPrice.fmt}`;
-            stockInfo.appendChild(price);
+            stockInfoEl.appendChild(price);
 
-            var fifty2WeekHigh = document.createElement("span");
+            // Add 52 week high
+            var fifty2WeekHigh = document.createElement("p");
             fifty2WeekHigh.textContent = `52 High: ${data.summaryDetail.fiftyTwoWeekHigh.raw}`;
-            stockInfo.appendChild(fifty2WeekHigh);
+            stockInfoEl.appendChild(fifty2WeekHigh);
 
-            var fifty2WeekLow = document.createElement("span");
+            // Add 52 week low
+            var fifty2WeekLow = document.createElement("p");
             fifty2WeekLow.textContent = `52 Low: ${data.summaryDetail.fiftyTwoWeekLow.raw}`;
-            stockInfo.appendChild(fifty2WeekLow);
+            stockInfoEl.appendChild(fifty2WeekLow);
 
-
-
-
+            // Add link to yahoo - specific to given symbol
             var linkToYahoo = document.createElement("a");
             linkToYahoo.setAttribute("href", `https://finance.yahoo.com/quote/${data.symbol}`);
             linkToYahoo.setAttribute("target", "_blank");
+            linkToYahoo.setAttribute("class", "mb-6");
             linkToYahoo.textContent = "Link to Yahoo: " + data.symbol;
-            stockInfo.appendChild(linkToYahoo);
+            stockInfoEl.appendChild(linkToYahoo);
 
-            var symbolSummary = document.createElement("span");
-            symbolSummary.textContent = `Summary: ${data.summaryProfile.longBusinessSummary}`
-            stockInfo.appendChild(symbolSummary);
-
-            // -----------------------------------------------------------------------
-
+            var symbolSummary = document.createElement("p");
+            symbolSummary.textContent = `${data.summaryProfile.longBusinessSummary}`
+            stockInfoEl.appendChild(symbolSummary);
+                
             // Add symbol to front of history list
             stockSymbolArray.unshift(data.symbol);
             stockSymbolArray.pop();
             console.log(stockSymbolArray);  
+
             // Store history list locally          
             localStorage.setItem("stock-history", JSON.stringify(stockSymbolArray));
+
             // Render the history list on the page
             renderStockHistory();
-
-
-            // for (var i = 0; i < data.news.length; i++) {
-            //     var stockArtImg = document.createElement("img");
-            //     
-            // }
-
+            apiSymbolArticle(symbol);
+            
         })
-        .catch(err => {
-            console.error(err);
-        });
+
+    }
+
+// This gets articles from Yahoo Finance relevant to the symbol searched and displays 5 articles
+function apiSymbolArticle(symbolArt) {
+    fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-news?category=${symbolArt}&region=US`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": `${financeApiKey}`,
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log("Specific Symbol News:")
+            console.log(data);
+            
+
+
+            var newsContainerTitle = document.createElement("p");
+            newsContainerTitle.setAttribute("class", "title mt-3");
+            newsContainerTitle.textContent = "Relevant Yahoo Finance Articles";
+            newsContent.appendChild(newsContainerTitle);
+
+            for (var i = 0; i < 5; i++) {
+
+                // Create container for news articles
+                var newsItemEl = document.createElement("article");
+                newsItemEl.classList.add("card", "columns", "mt-2", "mb-2");
+                newsItemEl.setAttribute("data-index", i);
+                newsContent.appendChild(newsItemEl);
+
+
+                // Create figure for news image
+                var newsItemImgEl = document.createElement("figure");
+                newsItemImgEl.classList.add("column", "is-3", "image");
+                newsItemEl.appendChild(newsItemImgEl);
+
+                // Add news image to figure container
+                var newsImg = document.createElement("img");
+                if (data.items.result[i].main_image === null) {
+                    newsImg.setAttribute("alt", "News Anchor");
+                    newsImg.src = "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-260nw-442698565.jpg";
+                } else {
+                    newsImg.setAttribute("alt", "Add image alt Text reference")
+                    newsImg.src = data.items.result[i].main_image.original_url;
+                }
+
+                newsItemImgEl.appendChild(newsImg);
+
+                // Add Container for Title and Subtitle after Figure
+                var newsItemContent = document.createElement("div");
+                newsItemContent.setAttribute("class", "column is-9");
+                newsItemEl.append(newsItemContent);
+
+                // Add Title and Subtitle to specific news container
+                var newsItemTitle = document.createElement("p");
+                newsItemTitle.setAttribute("class", "title");
+                newsItemTitle.textContent = data.items.result[i].title;
+                newsItemContent.appendChild(newsItemTitle);
+
+                var newsItemSubtitle = document.createElement("p");
+                newsItemSubtitle.setAttribute("class", "subtitle ml-3");
+                if (data.items.result[i].author = " ") {
+                    newsItemSubtitle.textContent = data.items.result[i].publisher;
+                } else {
+                    newsItemSubtitle.textContent = data.items.result[i].author;
+                }
+                newsItemContent.appendChild(newsItemSubtitle);
+            }
+            getRedditApi(symbolArt);
+        })
+    }
+
+// This gets 5 posts from reddit relevant to the symbol searched and renders underneath the yahoo finance articles
+function getRedditApi(symbolSearch) {
+    fetch(`https://api.pushshift.io/reddit/submission/search?q=${symbolSearch}&subreddit=investing`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log("Reddit Posts:")
+            console.log(data);
+            
+            var newsContainerTitle = document.createElement("p");
+            newsContainerTitle.setAttribute("class", "title");
+            newsContainerTitle.textContent = "Relevant Reddit Posts on r/investing";
+            newsContent.appendChild(newsContainerTitle);
+
+            var redditPostContainer = document.createElement("div");
+            newsContent.appendChild(redditPostContainer);
+
+            for (var i = 0; i < 5; i++) {
+
+                // Create container for news articles
+                var newsItemEl = document.createElement("article");
+                newsItemEl.classList.add("card", "columns", "mt-2", "mb-2");
+                newsItemEl.setAttribute("data-index", i);
+                redditPostContainer.appendChild(newsItemEl);
+
+                //Add Container for Title
+                var redditTitleEl = document.createElement("div");
+                redditTitleEl.setAttribute("class", "column");
+                newsItemEl.append(redditTitleEl);
+
+                // Add Title to specific news container that is hyperlink
+                var newsItemTitle = document.createElement("a");
+                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("href", data.data[i].full_link);
+                newsItemTitle.setAttribute("target", "_blank");
+                newsItemTitle.textContent = data.data[i].title;
+                redditTitleEl.appendChild(newsItemTitle);
+
+                /*
+                //Add container for author
+                var redditAuthorEl = document.createElement("div");
+                redditAuthorEl.setAttribute("class", "column");
+                newsItemEl.append(redditAuthorEl);
+
+                var newsItemSubtitle = document.createElement("p");
+                newsItemSubtitle.setAttribute("class", "subtitle ml-3");
+                newsItemSubtitle.textContent = `${data.data[i].selftext}`;
+                redditAuthorEl.appendChild(newsItemSubtitle);
+                */
+            }
+            
+        })
 }
 
-var articleContent = document.querySelector("#articles-content");
 
 //gets random stock news and automatically appears on page------------------------
-function getApiNews() {
-
-
+function getApiRandomNews() {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
+
         "method": "GET",
         "headers": {
             "x-rapidapi-key": `${financeApiKey}`,
@@ -147,59 +283,67 @@ function getApiNews() {
             console.log("Random News:")
             console.log(data);
 
-            var articleHeader = document.createElement("h1");
-            articleHeader.classList.add("has-text-centered", "is-size-1");
-            articleHeader.innerHTML = "";
-            articleHeader.textContent = "New Articles";
-            articleContent.appendChild(articleHeader);
+            var newsContainerTitle = document.createElement("p");
+            newsContainerTitle.setAttribute("class", "title mt-3");
+            newsContainerTitle.textContent = "General Stock News";
+            newsContent.appendChild(newsContainerTitle);
 
             for (var i = 0; i < data.items.result.length; i++) {
 
-                //card header
-                var cardHeadContainer = document.createElement("div");
-                cardHeadContainer.classList.add("card", "m-6", "is-align-items-center", "has-background-grey-light", "p-3");
-                
-                var cardHeader = document.createElement("header");
-                cardHeader.classList.add("card-header", "is-size-4", "is-flex-direction-column");
-                cardHeader.textContent = "Title: " + data.items.result[i].title;
-                cardHeadContainer.appendChild(cardHeader);
-                articleContent.appendChild(cardHeadContainer);
+                // Create container for news articles
+                var newsItemEl = document.createElement("article");
+                newsItemEl.classList.add("card", "columns", "mt-2", "mb-2");
+                newsItemEl.setAttribute("data-index", i);
+                newsContent.appendChild(newsItemEl);
 
-                var artAuthor = document.createElement("p");
+                // Create figure for news image
+                var newsItemImgEl = document.createElement("figure");
+                newsItemImgEl.classList.add("column", "is-3", "image");
+                newsItemEl.appendChild(newsItemImgEl);
 
-                if (data.items.result[i].author = " ") {
-                    artAuthor.textContent = "Publisher: " + data.items.result[i].publisher;
-                } else {
-                    artAuthor.textContent = "Author: " + data.items.result[i].author;
-
-                }
-                cardHeader.appendChild(artAuthor);
-
-                var artImage = document.createElement("img");
-
+                // Add news image to figure
+                var newsImg = document.createElement("img");
                 if (data.items.result[i].main_image === null) {
-                    artImage.setAttribute("alt", "News Anchor");
-                    artImage.src = "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-260nw-442698565.jpg";
+                    newsImg.setAttribute("alt", "News Anchor");
+                    newsImg.src = "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-260nw-442698565.jpg";
                 } else {
-                    // artImage.setAttribute("style", "max-height: 900px; max-width: 900px;")
-                    artImage.src = data.items.result[i].main_image.original_url;
+                    newsImg.setAttribute("alt", "Add image alt Text reference")
+                    newsImg.src = data.items.result[i].main_image.original_url;
                 }
-                cardHeader.appendChild(artImage);
 
-                //-------------if body content is null do something------------------------------------------------------------------------------------------------
+                newsItemImgEl.appendChild(newsImg);
 
+                // Add Container for Title and Subtitle after Figure
+                var newsItemContent = document.createElement("div");
+                newsItemContent.setAttribute("class", "column is-9");
+                newsItemEl.append(newsItemContent);
 
-                // card body will append to header
+                // Add Title and Subtitle to specific news container
+                var newsItemTitle = document.createElement("p");
+                newsItemTitle.setAttribute("class", "title");
+                newsItemTitle.textContent = data.items.result[i].title;
+                newsItemContent.appendChild(newsItemTitle);
+
+                var newsItemSubtitle = document.createElement("p");
+                newsItemSubtitle.setAttribute("class", "subtitle ml-3");
+                if (data.items.result[i].author = " ") {
+                    newsItemSubtitle.textContent = data.items.result[i].publisher;
+                } else {
+                    newsItemSubtitle.textContent = data.items.result[i].author;
+                }
+                newsItemContent.appendChild(newsItemSubtitle);
+
+                // Add a show more button to reveal the article in a modal 
+                var showMoreButton = document.createElement("button");
+                showMoreButton.textContent = "Read Article";
+                showMoreButton.setAttribute("class", "button");
+                showMoreButton.setAttribute('id', 'show-more-' + i);
+                newsItemContent.appendChild(showMoreButton);
+                
+
                 var modalBody = document.querySelector(".modal-card-body");
 
-                // append to page
-                
-                
-                var showMoreButton = document.createElement("button");
-                showMoreButton.textContent = "Read Article"
-                showMoreButton.setAttribute('id', 'show-more-' + i)
-                cardHeader.appendChild(showMoreButton);
-                
+                //Show more button handler
                 showMoreButton.addEventListener("click", function (event) {
                     modalBody.innerHTML = "";
                     var idIndex = parseInt(event.target.getAttribute('id').split("-")[2]);
@@ -220,8 +364,12 @@ function getApiNews() {
 
 
 
-                    document.querySelector(".modal").classList.add("is-active");                    
+                    document.querySelector(".modal").classList.add("is-active");        
                 })
+
+            }
+                
+                
 
                 var cancelButton = document.querySelector("#cancel-button");
 
@@ -229,85 +377,8 @@ function getApiNews() {
                     document.querySelector(".modal").classList.remove("is-active");
 
                 })
-            }
-        })
-        .catch(err => {
-            console.error(err);
-        });
-}
-
-var articlePicture = document.querySelector("#article-picture");
-var articleHrefLinks = document.querySelector("#article-href-links");
-
-
-//has stock symbol and can access news relating-----------------------------------
-function apiSymbolArticle(symbolArt) {
-    fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-news?category=${symbolArt}&region=US`, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": `${financeApiKey}`,
-            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+            })
         }
-    })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log("Specific Symbol News:")
-            console.log(data);
-            
-            articlePicture.innerHTML = "";
-            for(var i = 0 ; i < 5; i++){
-                var specificStockArtImg = document.createElement("img");
-
-                if (data.items.result[i].main_image === null) {
-                    specificStockArtImg.setAttribute("alt", "Stock News Image");
-                    specificStockArtImg.src = "https://image.freepik.com/free-photo/financial-stock-market-graph-chart-stock-market-investment-trading-screen_9693-990.jpg";
-                    specificStockArtImg.setAttribute("width", 100);
-                    articlePicture.appendChild(specificStockArtImg);
-                } else {
-                    specificStockArtImg.src = data.items.result[i].main_image.original_url;
-                    specificStockArtImg.setAttribute("width", 100);
-                    articlePicture.appendChild(specificStockArtImg);
-                }
-                
-                
-                var divOut = document.createElement("div");
-                divOut.classList.add("is-five-fifths", "is-flex", "is-align-items-center", "is-flex-wrap-wrap", "columns");
-                articlePicture.appendChild(divOut)
-
-                var divvvv = document.createElement("div");
-
-                // specificStockArtImg.setAttribute("style", "margin: 30px; border-radius: 10px;");
-                specificStockArtImg.setAttribute("width", 100);  
-                divvvv.classList.add("column", "is-one-fifth", "m-0");                 
-                specificStockArtImg.classList.add("is-five-fifths", "is-rounded");  
-                divvvv.appendChild(specificStockArtImg);
-                divOut.appendChild(divvvv);    
-                
-                var specificStockArtLink = document.createElement("a");
-                specificStockArtLink.setAttribute("href", data.items.result[i].link);
-                specificStockArtLink.setAttribute("target", "_blank");
-                specificStockArtLink.classList.add("is-size-4", "column", "is-four-fifths", "m-0");
-                specificStockArtLink.textContent = data.items.result[i].title;
-                divOut.append(specificStockArtLink);
-            }
-
-        })
-        .catch(err => {
-            console.error(err);
-        });
-}
-
-function getRedditApi() {
-
-}
-
-var stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
-
-
-
-
 
 function renderStockHistory() {
     //searchHistoryEl.empty();
@@ -326,16 +397,14 @@ searchBtn.addEventListener("click", searchClickHandler);
 function searchClickHandler(event) {
     event.preventDefault();
     var searchStock = input.value;
-    articleContent.classList.add("hide");
+    //articleContent.classList.add("hide");
 
     if (searchStock === "") {
         return;
     }
 
-    stockContainer.classList.remove("hide");
     input.value = "";
     getApi(searchStock);
-    apiSymbolArticle(searchStock);
 }
 
 // Clear local storage button functionality 
@@ -353,13 +422,9 @@ function getHistoryItemInfo(event) {
 
     if (element.matches("button") === true) {
         var historyIndex = element.getAttribute("data-index");
-        historySymbol = stockSymbolArray[historyIndex];
-        
-        articleContent.classList.add("hide");
-        stockContainer.classList.remove("hide");        
+        historySymbol = stockSymbolArray[historyIndex];        
         
         getApi(historySymbol);
-        getApiNews(historySymbol);
     }
 
     
@@ -372,7 +437,6 @@ function init() {
 
     // if local storage not empty
     if (storedStockSymbols !== null) {
-        // stock array = local storage
         stockSymbolArray = storedStockSymbols;
     }
 
