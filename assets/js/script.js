@@ -5,7 +5,7 @@ var stockInfo = document.querySelector("#stock-info");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "c462dc0ef0msh7c6ab98cd5f53a6p174e20jsn1fa2fd980723";
+var financeApiKey = "f2e83bae15msh3de8865564383bbp1b8df0";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
@@ -63,7 +63,9 @@ function getApi(symbol) {
             stockInfo.innerHTML = "";
 
             var stockLogo = document.createElement("img");
-            console.log(data.summaryProfile.website.split("http://www."))
+            // if (`https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}` === 404){
+            //     console.log("fuck off");
+            // }
             stockLogo.setAttribute("src", `https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}`);
             stockLogo.setAttribute("width", 100);
             stockInfo.appendChild(stockLogo);
@@ -156,11 +158,12 @@ function getApiNews() {
                 //card header
                 var cardHeadContainer = document.createElement("div");
                 cardHeadContainer.classList.add("card", "m-6", "is-align-items-center", "has-background-grey-light", "p-3");
-
+                
                 var cardHeader = document.createElement("header");
                 cardHeader.classList.add("card-header", "is-size-4", "is-flex-direction-column");
                 cardHeader.textContent = "Title: " + data.items.result[i].title;
                 cardHeadContainer.appendChild(cardHeader);
+                articleContent.appendChild(cardHeadContainer);
 
                 var artAuthor = document.createElement("p");
 
@@ -189,41 +192,37 @@ function getApiNews() {
                 // card body will append to header
                 var modalBody = document.querySelector(".modal-card-body");
 
-                var infoCard = document.createElement("div");
-                infoCard.classList.add("card");
-
-                var cardContent = document.createElement("div");
-                cardContent.classList.add("card-content");
-                infoCard.appendChild(cardContent);
-
-                var cardBody = document.createElement("div");
-                cardBody.classList.add("content");
-                cardBody.innerHTML = data.items.result[i].content;
-                cardContent.appendChild(cardBody);
-
                 // append to page
-                modalBody.append(infoCard);
-                // cardHeadContainer.appendChild(infoCard);
-                articleContent.appendChild(cardHeadContainer);
-
-
+                
+                
                 var showMoreButton = document.createElement("button");
                 showMoreButton.textContent = "Read Article"
                 showMoreButton.setAttribute('id', 'show-more-' + i)
                 cardHeader.appendChild(showMoreButton);
-
+                
                 showMoreButton.addEventListener("click", function (event) {
+                    modalBody.innerHTML = "";
+                    var idIndex = parseInt(event.target.getAttribute('id').split("-")[2]);
 
-                    // var hi = this.parentElement.parentElement.parentElement.parentElement.parentElement.nextElementSibling.children[1].children[1];
-                    // console.log("body of modal",hi);
-                    // hi = data.items.
-                    // modalBody.innerHTML = hi;
-                    // console.log(hi);
+                    var infoCard = document.createElement("div");
+                    infoCard.classList.add("card");
+                    
+                    var cardContent = document.createElement("div");
+                    cardContent.classList.add("card-content");
+                    infoCard.appendChild(cardContent);
+                    
+                    var cardBody = document.createElement("div");
+                    cardBody.classList.add("content");
+                    cardBody.innerHTML = data.items.result[idIndex].content;
+                    cardContent.appendChild(cardBody);
+                    
+                    modalBody.append(infoCard);
 
-                    document.querySelector(".modal").classList.add("is-active");
 
 
+                    document.querySelector(".modal").classList.add("is-active");                    
                 })
+
                 var cancelButton = document.querySelector("#cancel-button");
 
                 cancelButton.addEventListener("click", function (event) {
@@ -237,8 +236,6 @@ function getApiNews() {
         });
 }
 
-
-var stockNewsLinks = document.querySelector("#stock-news-links");
 var articlePicture = document.querySelector("#article-picture");
 var articleHrefLinks = document.querySelector("#article-href-links");
 
@@ -258,10 +255,9 @@ function apiSymbolArticle(symbolArt) {
         .then(function (data) {
             console.log("Specific Symbol News:")
             console.log(data);
-
-            for (var i = 0; i < 5; i++) {
-                articlePicture.innerHTML = "";
-                articleHrefLinks.innerHTML = "";
+            
+            articlePicture.innerHTML = "";
+            for(var i = 0 ; i < 5; i++){
                 var specificStockArtImg = document.createElement("img");
 
                 if (data.items.result[i].main_image === null) {
@@ -274,8 +270,27 @@ function apiSymbolArticle(symbolArt) {
                     specificStockArtImg.setAttribute("width", 100);
                     articlePicture.appendChild(specificStockArtImg);
                 }
-                // var specificStockArtLink = document.createElement("div");
-                // specificStockArtLink.textContent = 
+                
+                
+                var divOut = document.createElement("div");
+                divOut.classList.add("is-five-fifths", "is-flex", "is-align-items-center", "is-flex-wrap-wrap", "columns");
+                articlePicture.appendChild(divOut)
+
+                var divvvv = document.createElement("div");
+
+                // specificStockArtImg.setAttribute("style", "margin: 30px; border-radius: 10px;");
+                specificStockArtImg.setAttribute("width", 100);  
+                divvvv.classList.add("column", "is-one-fifth", "m-0");                 
+                specificStockArtImg.classList.add("is-five-fifths", "is-rounded");  
+                divvvv.appendChild(specificStockArtImg);
+                divOut.appendChild(divvvv);    
+                
+                var specificStockArtLink = document.createElement("a");
+                specificStockArtLink.setAttribute("href", data.items.result[i].link);
+                specificStockArtLink.setAttribute("target", "_blank");
+                specificStockArtLink.classList.add("is-size-4", "column", "is-four-fifths", "m-0");
+                specificStockArtLink.textContent = data.items.result[i].title;
+                divOut.append(specificStockArtLink);
             }
 
         })
