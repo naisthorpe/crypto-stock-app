@@ -2,6 +2,8 @@ var input = document.querySelector("#input");
 var searchBtn = document.querySelector("#search");
 var stockInfo = document.querySelector("#stock-info");
 
+var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
+var historyElement = document.getElementById("search-history");
 
 var financeApiKey = "f2e83bae15msh3de8865564383bbp1b8df0";
 
@@ -9,6 +11,8 @@ var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
+
+var stockSymbol;
 
 toggle.addEventListener("click", function () {
     // If the menu is showing
@@ -44,7 +48,6 @@ function getApi(symbol) {
         "method": "GET",
         "headers": {
 
-
             "x-rapidapi-key": `${financeApiKey}`,
 
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
@@ -71,9 +74,9 @@ function getApi(symbol) {
             fullSymbolName.textContent = `Symbol: ${data.quoteType.longName}`;
             stockInfo.appendChild(fullSymbolName);
 
-            var symbol = document.createElement("span");
-            symbol.textContent = `Symbol: ${data.symbol}`;
-            stockInfo.appendChild(symbol);
+            stockSymbol = document.createElement("span");
+            stockSymbol.textContent = `Symbol: ${data.symbol}`;
+            stockInfo.appendChild(stockSymbol);
 
             var price = document.createElement("span");
             price.textContent = `Price: ${data.price.regularMarketPrice.fmt}`;
@@ -102,6 +105,14 @@ function getApi(symbol) {
 
             // -----------------------------------------------------------------------
 
+            // Add symbol to front of history list
+            stockSymbolArray.unshift(data.symbol);
+            stockSymbolArray.pop();
+            console.log(stockSymbolArray);  
+            // Store history list locally          
+            localStorage.setItem("stock-history", JSON.stringify(stockSymbolArray));
+            // Render the history list on the page
+            renderStockHistory();
 
 
             // for (var i = 0; i < data.news.length; i++) {
@@ -114,10 +125,6 @@ function getApi(symbol) {
             console.error(err);
         });
 }
-
-
-
-
 
 var articleContent = document.querySelector("#articles-content");
 
@@ -237,7 +244,7 @@ var articleHrefLinks = document.querySelector("#article-href-links");
 function apiSymbolArticle(symbolArt) {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/get-news?category=${symbolArt}&region=US`, {
         "method": "GET",
-        "headers": {            
+        "headers": {
             "x-rapidapi-key": `${financeApiKey}`,
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
@@ -252,12 +259,16 @@ function apiSymbolArticle(symbolArt) {
             articlePicture.innerHTML = "";
             for(var i = 0 ; i < 5; i++){
                 var specificStockArtImg = document.createElement("img");
-                
-                if(data.items.result[i].main_image === null) {
+
+                if (data.items.result[i].main_image === null) {
                     specificStockArtImg.setAttribute("alt", "Stock News Image");
                     specificStockArtImg.src = "https://image.freepik.com/free-photo/financial-stock-market-graph-chart-stock-market-investment-trading-screen_9693-990.jpg";
+                    specificStockArtImg.setAttribute("width", 100);
+                    articlePicture.appendChild(specificStockArtImg);
                 } else {
                     specificStockArtImg.src = data.items.result[i].main_image.original_url;
+                    specificStockArtImg.setAttribute("width", 100);
+                    articlePicture.appendChild(specificStockArtImg);
                 }
                 
                 
@@ -292,15 +303,86 @@ function getRedditApi() {
 
 }
 
+var stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
 
+
+
+
+
+function renderStockHistory() {
+    //searchHistoryEl.empty();
+
+    for (var i = 0; i < stockSymbolArray.length; i++) {
+        var searchHistoryEl = document.getElementById(`history-${i}`);
+        searchHistoryEl.textContent = stockSymbolArray[i];
+        searchHistoryEl.setAttribute("data-index", i);
+    }
+}
 
 var stockContainer = document.querySelector("#stock-container");
 searchBtn.addEventListener("click", searchClickHandler);
 
-function searchClickHandler() {
+
+function searchClickHandler(event) {
+    event.preventDefault();
     var searchStock = input.value;
     articleContent.classList.add("hide");
+
+    if (searchStock === "") {
+        return;
+    }
+
     stockContainer.classList.remove("hide");
+    input.value = "";
     getApi(searchStock);
     apiSymbolArticle(searchStock);
 }
+
+// Clear local storage button functionality 
+function clearHistory() {
+    localStorage.clear();
+    stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
+    renderStockHistory();
+}
+
+// Make history buttons run the getAPI function for given symbol
+function getHistoryItemInfo(event) {
+
+    var element = event.target;
+    console.log(element);    
+
+    if (element.matches("button") === true) {
+        var historyIndex = element.getAttribute("data-index");
+        historySymbol = stockSymbolArray[historyIndex];
+        
+        articleContent.classList.add("hide");
+        stockContainer.classList.remove("hide");        
+        
+        getApi(historySymbol);
+        getApiNews(historySymbol);
+    }
+
+    
+}
+
+function init() {
+
+    // get symbols from local storage
+    var storedStockSymbols = JSON.parse(localStorage.getItem("stock-history"));
+
+    // if local storage not empty
+    if (storedStockSymbols !== null) {
+        // stock array = local storage
+        stockSymbolArray = storedStockSymbols;
+    }
+
+    // then render the history
+    renderStockHistory();
+}
+
+init();
+
+
+clearLocalHistoryBtn.addEventListener("click", clearHistory);
+
+historyElement.addEventListener("click", getHistoryItemInfo);
