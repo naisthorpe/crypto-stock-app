@@ -162,14 +162,14 @@ nav ul li:hover ul.sub-nav {
     
   }
 
-  @media screen and (max-width: 637px){
+  /* @media screen and (max-width: 637px){
     .StreamsHero-header{
       font-size: 22px;
     }
     .StreamsHero-blurb {
       font-size: 15px;
     }
-  }
+  } */
 
   /* Animation Wave Color */
   

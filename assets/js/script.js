@@ -2,10 +2,12 @@ var input = document.querySelector("#input");
 var searchBtn = document.querySelector("#search");
 var stockInfo = document.querySelector("#stock-info");
 
+var newsContent = document.getElementById("content");
+
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "c462dc0ef0msh7c6ab98cd5f53a6p174e20jsn1fa2fd980723";
+var financeApiKey = "a4e5e5bec6msh6db86fc928431e7p1bf83cjsn6e2902641519";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
@@ -60,33 +62,33 @@ function getApi(symbol) {
             console.log("Symbol Financials:");
             console.log(data);
 
-            stockInfo.innerHTML = "";
+            newsContent.innerHTML = "";
 
             var stockLogo = document.createElement("img");
             console.log(data.summaryProfile.website.split("http://www."))
             stockLogo.setAttribute("src", `https://logo.uplead.com/${data.summaryProfile.website.split("http://www.")[1]}`);
             stockLogo.setAttribute("width", 100);
-            stockInfo.appendChild(stockLogo);
+            newsContent.append(stockLogo);
 
             var fullSymbolName = document.createElement("span");
             fullSymbolName.textContent = `Symbol: ${data.quoteType.longName}`;
-            stockInfo.appendChild(fullSymbolName);
+            newsContent.append(fullSymbolName);
 
             stockSymbol = document.createElement("span");
             stockSymbol.textContent = `Symbol: ${data.symbol}`;
-            stockInfo.appendChild(stockSymbol);
+            newsContent.append(stockSymbol);
 
             var price = document.createElement("span");
             price.textContent = `Price: ${data.price.regularMarketPrice.fmt}`;
-            stockInfo.appendChild(price);
+            newsContent.append(price);
 
             var fifty2WeekHigh = document.createElement("span");
             fifty2WeekHigh.textContent = `52 High: ${data.summaryDetail.fiftyTwoWeekHigh.raw}`;
-            stockInfo.appendChild(fifty2WeekHigh);
+            newsContent.append(fifty2WeekHigh);
 
             var fifty2WeekLow = document.createElement("span");
             fifty2WeekLow.textContent = `52 Low: ${data.summaryDetail.fiftyTwoWeekLow.raw}`;
-            stockInfo.appendChild(fifty2WeekLow);
+            newsContent.append(fifty2WeekLow);
 
 
 
@@ -95,11 +97,11 @@ function getApi(symbol) {
             linkToYahoo.setAttribute("href", `https://finance.yahoo.com/quote/${data.symbol}`);
             linkToYahoo.setAttribute("target", "_blank");
             linkToYahoo.textContent = "Link to Yahoo: " + data.symbol;
-            stockInfo.appendChild(linkToYahoo);
+            newsContent.appendChild(linkToYahoo);
 
             var symbolSummary = document.createElement("span");
             symbolSummary.textContent = `Summary: ${data.summaryProfile.longBusinessSummary}`
-            stockInfo.appendChild(symbolSummary);
+            newsContent.appendChild(symbolSummary);
 
             // -----------------------------------------------------------------------
 
@@ -145,34 +147,76 @@ function getApiNews() {
             console.log("Random News:")
             console.log(data);
 
-            var articleHeader = document.createElement("h1");
-            articleHeader.classList.add("has-text-centered", "is-size-1");
-            articleHeader.innerHTML = "";
-            articleHeader.textContent = "New Articles";
-            articleContent.appendChild(articleHeader);
+            for (var i = 0; i < 5; i++) {
 
-            for (var i = 0; i < data.items.result.length; i++) {
+                // Create container for news articles
+                var newsItemEl = document.createElement("article");
+                newsItemEl.classList.add("card", "columns", "mt-2", "mb-2");
+                newsItemEl.setAttribute("data-index", i);
+                newsContent.appendChild(newsItemEl);
+
+                // Create figure for news image
+                var newsItemImgEl = document.createElement("figure");
+                newsItemImgEl.classList.add("column", "is-3", "image");
+                newsItemEl.appendChild(newsItemImgEl);
+
+                // Add news image to figure
+                var newsImg = document.createElement("img");
+                if (data.items.result[i].main_image === null) {
+                    newsImg.setAttribute("alt", "News Anchor");
+                    newsImg.src = "https://image.shutterstock.com/image-vector/news-anchor-on-tv-breaking-260nw-442698565.jpg";
+                } else {
+                    newsImg.setAttribute("alt", "Add image alt Text reference")
+                    newsImg.src = data.items.result[i].main_image.original_url;
+                }
+                newsItemImgEl.appendChild(newsImg);
+
+                // Add Container for Title and Subtitle after Figure
+                var newsItemContent = document.createElement("div");
+                newsItemContent.setAttribute("class", "column is-9");
+                newsItemEl.append(newsItemContent);
+
+                // Add Title and Subtitle to specific news container
+                var newsItemTitle = document.createElement("p");
+                newsItemTitle.setAttribute("class", "title");
+                newsItemTitle.textContent = data.items.result[i].title;
+                newsItemContent.appendChild(newsItemTitle);
+
+                var newsItemSubtitle = document.createElement("p");
+                newsItemSubtitle.setAttribute("class", "subtitle ml-3");
+                if (data.items.result[i].author = " ") {
+                    newsItemSubtitle.textContent = data.items.result[i].publisher;
+                } else {
+                    newsItemSubtitle.textContent = data.items.result[i].author;
+                }
+                newsItemContent.appendChild(newsItemSubtitle);
 
                 //card header
-                var cardHeadContainer = document.createElement("div");
-                cardHeadContainer.classList.add("card", "m-6", "is-align-items-center", "has-background-grey-light", "p-3");
+                /*
+                var cardHeadContainer = document.createElement("article");
+                cardHeadContainer.classList.add("mb-3", "card", "columns", "is-align-items-center", "has-background-primary", "p-2");
+                newsContent.appendChild(cardHeadContainer);
 
-                var cardHeader = document.createElement("header");
-                cardHeader.classList.add("card-header", "is-size-4", "is-flex-direction-column");
-                cardHeader.textContent = "Title: " + data.items.result[i].title;
+                var cardHeader = document.createElement("div");
+                cardHeader.classList.add("title", "column", "is-size-4", "is-flex-direction-column");
+                cardHeader.textContent = data.items.result[i].title;
                 cardHeadContainer.appendChild(cardHeader);
 
                 var artAuthor = document.createElement("p");
-
+                artAuthor.classList.add("pl-3", "subtitle");
                 if (data.items.result[i].author = " ") {
-                    artAuthor.textContent = "Publisher: " + data.items.result[i].publisher;
+                    artAuthor.textContent = data.items.result[i].publisher;
                 } else {
-                    artAuthor.textContent = "Author: " + data.items.result[i].author;
+                    artAuthor.textContent = data.items.result[i].author;
 
                 }
                 cardHeader.appendChild(artAuthor);
 
-                var artImage = document.createElement("img");
+                var artImageContainer = document.createElement("figure");
+                artImageContainer.classList.add("image", "is-128x128");
+                cardHeader.appendChild(artImageContainer);
+
+                var artImage = document.createElement("img");            
 
                 if (data.items.result[i].main_image === null) {
                     artImage.setAttribute("alt", "News Anchor");
@@ -181,12 +225,16 @@ function getApiNews() {
                     // artImage.setAttribute("style", "max-height: 900px; max-width: 900px;")
                     artImage.src = data.items.result[i].main_image.original_url;
                 }
-                cardHeader.appendChild(artImage);
+                
+                artImageContainer.appendChild(artImage);
+
+                */
 
                 //-------------if body content is null do something------------------------------------------------------------------------------------------------
 
 
                 // card body will append to header
+                /*
                 var modalBody = document.querySelector(".modal-card-body");
 
                 var infoCard = document.createElement("div");
@@ -222,20 +270,22 @@ function getApiNews() {
 
                     document.querySelector(".modal").classList.add("is-active");
 
-
-                })
+                    */
+                }
                 var cancelButton = document.querySelector("#cancel-button");
 
                 cancelButton.addEventListener("click", function (event) {
                     document.querySelector(".modal").classList.remove("is-active");
 
                 })
-            }
-        })
+            })
+        }
+        /*
         .catch(err => {
             console.error(err);
         });
-}
+        */
+
 
 
 var stockNewsLinks = document.querySelector("#stock-news-links");
