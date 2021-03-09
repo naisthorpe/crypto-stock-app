@@ -124,7 +124,9 @@ function getApi(symbol) {
 
             // Add symbol full name 
             var fullSymbolName = document.createElement("p");
+
             fullSymbolName.classList.add("column", "is-two-fifth", "m-0", "is-flex", "is-justify-content-center", "is-size-2", "has-text-weight-bold");
+
             fullSymbolName.textContent = `${data.quoteType.longName} (${data.symbol})`;
             symbolTitleDiv.appendChild(fullSymbolName);
 
@@ -227,13 +229,18 @@ function apiSymbolArticle(symbolArt) {
                 // Add Container for Title and Subtitle after Figure
                 var newsItemContent = document.createElement("div");
                 newsItemContent.setAttribute("class", "column is-9");
-                newsItemEl.append(newsItemContent);
+                newsItemEl.appendChild(newsItemContent);
 
                 // Add Title and Subtitle to specific news container
-                var newsItemTitle = document.createElement("p");
-                newsItemTitle.setAttribute("class", "title");
+                var newsTitleEl = document.createElement("div");
+                newsItemContent.appendChild(newsTitleEl);
+                
+                var newsItemTitle = document.createElement("a");
+                newsItemTitle.setAttribute("class", "title has-text-link is-hovered");
+                newsItemTitle.setAttribute("href", data.items.result[i].link);
+                newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.items.result[i].title;
-                newsItemContent.appendChild(newsItemTitle);
+                newsTitleEl.appendChild(newsItemTitle);
 
                 var newsItemSubtitle = document.createElement("p");
                 newsItemSubtitle.setAttribute("class", "subtitle ml-3");
@@ -243,6 +250,46 @@ function apiSymbolArticle(symbolArt) {
                     newsItemSubtitle.textContent = data.items.result[i].author;
                 }
                 newsItemContent.appendChild(newsItemSubtitle);
+
+                // Add a show more button to reveal the article in a modal 
+                var showMoreButton = document.createElement("button");
+                showMoreButton.textContent = "Read Article Summary";
+                showMoreButton.setAttribute("class", "button");
+                showMoreButton.setAttribute('id', 'show-more-' + i);
+                newsItemContent.appendChild(showMoreButton);
+
+                
+                var modalBody = document.querySelector(".modal-card-body");
+
+                //Show more button handler
+                showMoreButton.addEventListener("click", function (event) {
+                    modalBody.innerHTML = "";
+                    var idIndex = parseInt(event.target.getAttribute('id').split("-")[2]);
+                    console.log(idIndex);
+
+                    var infoCard = document.createElement("div");
+                    infoCard.classList.add("card");
+
+                    var cardContent = document.createElement("div");
+                    cardContent.classList.add("card-content");
+                    infoCard.appendChild(cardContent);
+
+                    var cardBody = document.createElement("div");
+                    cardBody.classList.add("content");
+                    if (data.items.result[idIndex].content === null){
+                        cardBody.innerHTML = data.items.result[idIndex].summary;
+                    } else {
+                        cardBody.innerHTML = data.items.result[idIndex].content;
+                    }
+                    
+                    cardContent.appendChild(cardBody);
+
+                    modalBody.append(infoCard);
+
+
+
+                    document.querySelector(".modal").classList.add("is-active");
+                })
             }
             getRedditApi(symbolArt);
         })
@@ -268,20 +315,34 @@ function getRedditApi(symbolSearch) {
 
             for (var i = 0; i < 5; i++) {
 
+                
+
                 // Create container for news articles
                 var newsItemEl = document.createElement("article");
                 newsItemEl.classList.add("card", "columns", "mt-2", "mb-2");
                 newsItemEl.setAttribute("data-index", i);
                 redditPostContainer.appendChild(newsItemEl);
 
+                // Create figure to hold image
+                var newsItemImgEl = document.createElement("figure");
+                newsItemImgEl.classList.add("column", "is-2", "image");
+                newsItemEl.appendChild(newsItemImgEl);
+
+                // Append reddit logo to figure
+                var newsImg = document.createElement("img");
+                newsImg.setAttribute("alt", "Reddit Logo");
+                //newsImg.setAttribute("class", "is-128x128");
+                newsImg.src = "https://image.flaticon.com/icons/png/512/52/52053.png";
+                newsItemImgEl.appendChild(newsImg);
+
                 //Add Container for Title
                 var redditTitleEl = document.createElement("div");
-                redditTitleEl.setAttribute("class", "column");
+                redditTitleEl.setAttribute("class", "column is-10 is-flex is-align-items-center");
                 newsItemEl.append(redditTitleEl);
 
                 // Add Title to specific news container that is hyperlink
                 var newsItemTitle = document.createElement("a");
-                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("class", "title has-text-link is-hovered");
                 newsItemTitle.setAttribute("href", data.data[i].full_link);
                 newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.data[i].title;
@@ -362,10 +423,17 @@ function getApiRandomNews() {
                 newsItemEl.append(newsItemContent);
 
                 // Add Title and Subtitle to specific news container
-                var newsItemTitle = document.createElement("p");
-                newsItemTitle.setAttribute("class", "title");
+
+                // Add Title and Subtitle to specific news container
+                var newsTitleEl = document.createElement("div");
+                newsItemContent.appendChild(newsTitleEl);
+                
+                var newsItemTitle = document.createElement("a");
+                newsItemTitle.setAttribute("class", "title has-text-link is-hovered");
+                newsItemTitle.setAttribute("href", data.items.result[i].link);
+                newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.items.result[i].title;
-                newsItemContent.appendChild(newsItemTitle);
+                newsTitleEl.appendChild(newsItemTitle);
 
                 var newsItemSubtitle = document.createElement("p");
                 newsItemSubtitle.setAttribute("class", "subtitle ml-3");
