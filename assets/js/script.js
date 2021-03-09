@@ -365,6 +365,8 @@ function getRedditApi(symbolSearch) {
 }
 
 
+
+
 //gets random stock news and automatically appears on page------------------------
 function getApiRandomNews() {
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/news/list?category=generalnews&region=US`, {
@@ -554,8 +556,19 @@ function handleFormSubmit(event) {
 
 formEl.on('submit', handleFormSubmit);
 
+// ------------------------------------------------------------------------
 
+var cookies = document.querySelector(".cookies");
+var cookieMonster = document.querySelector(".cookie-monster");
+var cancelCookie = document.querySelector(".cancel-button-cookie");
 
+cookies.addEventListener("click", function(){
+    cookieMonster.classList.add("is-active");
+});
+
+cancelCookie.addEventListener("click", function(){
+    cookieMonster.classList.remove("is-active");
+});
 
 // ------------------------------------------------------------------------
 
