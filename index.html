@@ -6,160 +6,241 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reddit Stock App</title>
-
+    <script src="https://kit.fontawesome.com/7cd377d9ce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 </head>
 
 <body>
-    <div class="container style">
-        <nav>
-            <ul>
-                <li class="menuitem"><a href="#bitcoin" style="text-decoration: none;color: inherit; ">
-                        <div class="menulink">Bitcoin Chart</div>
-                    </a></li>
-                <li class="menuitem"><a href="#stack-exchange" style="text-decoration: none; color: inherit;">
-                        <div class="menulink">StackExchange</div>
-                    </a></li>
-                <li class="menuitem"><a href="#reddit" style="text-decoration: none; color: inherit;">
-                        <div class="menulink">Reddit</div>
-                    </a></li>
 
 
-                <li>More
-                    <ul class="sub-nav">
-                        <li class="menuitem"><a href="#home" style="text-decoration: none;color: inherit;">
-                                <div class="menulink">Home</div>
-                            </a></li>
-                        <li class="menuitem"><a href="#Cookies" style="text-decoration: none;color: inherit;">
-                                <div class="menulink">Cookies & Privacy</div>
-                            </a></li>
-                        <li class="menuitem"><a href="#report" style="text-decoration: none;color: inherit;">
-                                <div class="menulink">Report an issue</div>
-                            </a></li>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand is-full grey">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://static.thenounproject.com/png/136700-200.png" width="30" height="28">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" id="nav-toggle">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
 
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        </div>
+        <div id="nav-menu" class="navbar-menu grey">
+            <a class="navbar-item has-text-black">
+                Home
+            </a>
+            <a class="navbar-item has-text-black">
+                Yahoo Finance
+            </a>
+            <a class="navbar-item has-text-black">
+                Bitcoin
+            </a>
 
-        <div class="StreamsHero-image">
-            <div class="StreamsHero-content">
-                <h2 class="StreamsHero-header">Platform where you can find cryptocurrency information and much more</h2>
-                <p class="StreamsHero-blurb">Keep track of your favorite pages and history</p>
+            <a class="navbar-item has-text-black">
+                Reddit
+            </a>
+
+            <div id="nav-more" class="navbar-item has-text-black has-dropdown is-hoverable">
+                <a class="navbar-link has-text-black">
+                    More
+                </a>
+
+                <div class="navbar-dropdown is-hidden" id="nav-dropdown">
+                    <a class="navbar-item has-text-black">
+                        Cookies & Privacy
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item has-text-black">
+                        Report an issue
+                    </a>
+                </div>
+
             </div>
+
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-body StreamsHero-image">
+            <p class="title has-text-white has-text-centered">
+                Platform Where You Can Find Stock Information
+            </p>
+            <p class="subtitle has-text-white has-text-centered">
+                Search to get relevant articles and Reddit posts
+            </p>
+        </div>
+    </section>
+
+
+
+    <!--Search Box and History/Favorites  -->
+
+    <div class="column">
+        <div class="columns">
+            <div class="column is-2">
+                <nav class="panel">
+                    <p class="panel-heading">
+                        Search Stocks
+                    </p>
+                    <div class="panel-block">
+                        <p class="control has-icons-left">
+                            <input id="input" class="input" type="text" placeholder="Ex. GME">
+                            <span class="icon is-left">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </p>
+                        
+                        <button id="search">Search</button>
+                        
+                    </div>
+                    <div id="search-history">
+                        <p class="panel-tabs">
+                            <a class="is-active">History</a>
+                            <a>Favorites</a>
+
+                        </p>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button  id="history-0" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-1" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-2" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-3" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-4" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-5" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-6" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-7" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-8" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-9" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                    </div>
+                    <div class="panel-block">
+                        <button id="clear-history-btn" class="button is-link is-outlined is-fullwidth">
+                            Clear Local History
+                        </button>
+                    </div>
+                </nav>
+
+
+            </div>
+            <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
+            <div id="content" class="column is-10">
+                <!--
+                    
+                <article class="card columns">
+                    <figure class="column is-3">
+                        <img></img>
+                    </figure>
+                    <div class="column is-9">
+                        <p class="title"></p>
+                        <p class="subtitle"></p>
+                        <button class="button">Read Article</button>
+                    </div>
+                </article>
+
+                -->
+
+
+            </div>
+            
+
+    <!--
+                <div class="columns">
+                <div class="column hide" id="stock-container">
+
+                    <div id="stock-info" class="column has-background-grey is-flex is-flex-direction-column">
+                    </div>
+
+
+                    <div id="stock-news-links" class="column has-background-grey is-flex is-flex-direction-row" style="margin-left: 100px; margin-top: 100px; margin-right: 100px;">
+                        <div id="article-picture" class="is-one-fifth"></div>
+                        <div id="article-href-links" class="is-four-fifths"></div>
+                    </div>
+
+                    <div id="reddit-stock-articles" class="column has-background-grey"">
+
+
+                    </div>
+                </div>
+                <div id="articles-content" class="column is-justify-content-center"></div>
+
+            </div>-->
+        </div>
+
+        <div class="modal" >
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">                
+                    <button class="delete" id="cancel-button" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body"></section>
+            </div>
+
         </div>
     </div>
-    <!--Search Box and History/Favorites  -->
-    <div class="columns">
-        <div class="column is-one-fifth">
-            <nav class="panel">
-                <p class="panel-heading">
-                    Search Stocks
-                </p>
-                <div class="panel-block">
-                    <p class="control has-icons-left">
-                        <input id="input" class="input" type="text" placeholder="Search">
-                        <span class="icon is-left">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                        </span>
-                    </p>
-                    <button id="search">Search</button>
-                </div>
-
-                <p class="panel-tabs">
-                    <a class="is-active">Favorites</a>
-                    <a>History</a>
-
-                </p>
-                <a class="panel-block is-active">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-code-branch" aria-hidden="true"></i>
-                    </span>
-
-                </a>
-
-                <div class="panel-block">
-                    <button class="button is-link is-outlined is-fullwidth">
-                        Clear History
-                    </button>
-                </div>
-            </nav>
-
-        </div>
-        <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
-        <div class="column is-four-fifths">
-            <div id="stock-outline"></div>
-            <div id="stocks-symbol"></div>
-            <div id="stock-price"></div>
-
-            <!-- <div class="has-text-centered is-size-1">Stock Articles</div> -->
-            <div id="articles-content" class="is-justify-content-center"></div>
-
-        </div>
 
 
 
+    <a href="https://www.uplead.com/?_ga=2.20266360.1914784608.1615136862-1413120390.1615136862" target="_blank"
+        rel="noopener noreferrer">Logos provided by UpLead</a>
 
 
     </div>

@@ -19,9 +19,20 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.test {
+  background: grey;
+  border-bottom: 1px solid red;
+
+}
+
+.test:hover {
+  color: #ea3b50;
+  box-shadow: inset 0 5px #ea3b50;
+}
+
 .container nav {
   width: 100%;
-  height: 75px;
+  max-height: 75px;
   background: grey;
   border-bottom: 1px solid red;
   position: fixed;
@@ -115,15 +126,19 @@ nav ul li:hover ul.sub-nav {
     background-size: 350% 350%;
     animation: waveColors 8s ease infinite;
     /* End Wave Color */
-    position: absolute;
+    /* position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     text-align: center;
-    margin: 0 auto;
+    margin: 0 auto; */
+  }
+
+  .grey {
+    background-color: grey;
   }
   
-  .StreamsHero-header {
+  .hero-color {
     color: #fff;
     font-weight: 200;
     line-height: 48px;
@@ -131,7 +146,7 @@ nav ul li:hover ul.sub-nav {
     font-size: 32px;
     background-size: cover;
     width: 100%;
-    min-height: 100px;
+    max-height: 100px;
     margin-top: 100px;
   }
   
@@ -146,8 +161,6 @@ nav ul li:hover ul.sub-nav {
     padding-bottom: 2em;
     
   }
-
-
   /* Animation Wave Color */
   
   @-webkit-keyframes waveColors {
