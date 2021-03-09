@@ -71,7 +71,9 @@ function getApi(symbol) {
         "method": "GET",
         "headers": {
 
+
             "x-rapidapi-key": `${financeApiKey}`,
+
 
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
@@ -294,7 +296,9 @@ function getApiRandomNews() {
 
         "method": "GET",
         "headers": {
+
             "x-rapidapi-key": `${financeApiKey}`,
+
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
         }
     })
@@ -392,7 +396,9 @@ function getApiRandomNews() {
                     document.querySelector(".modal").classList.add("is-active");
                 })
 
+
             }
+
 
 
 
