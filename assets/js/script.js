@@ -7,7 +7,7 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "f2e83bae15msh3de8865564383bbp1b8df0jsnf6f98996915b";
+var financeApiKey = "2de27e6d68mshc925b4db1c6ffd4p149673jsn497cb6662b48";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
@@ -90,6 +90,7 @@ function getApi(symbol) {
 
             // Add symbol full name 
             var fullSymbolName = document.createElement("p");
+            fullSymbolName.setAttribute("class", "title");
             fullSymbolName.textContent = `${data.quoteType.longName} (${data.symbol})`;
             stockInfoEl.appendChild(fullSymbolName);
 
@@ -229,15 +230,29 @@ function getRedditApi(symbolSearch) {
 
             for (var i = 0; i < 5; i++) {
 
+                
+
                 // Create container for news articles
                 var newsItemEl = document.createElement("article");
                 newsItemEl.classList.add("card", "columns", "mt-2", "mb-2");
                 newsItemEl.setAttribute("data-index", i);
                 redditPostContainer.appendChild(newsItemEl);
 
+                // Create figure to hold image
+                var newsItemImgEl = document.createElement("figure");
+                newsItemImgEl.classList.add("column", "is-2", "image");
+                newsItemEl.appendChild(newsItemImgEl);
+
+                // Append reddit logo to figure
+                var newsImg = document.createElement("img");
+                newsImg.setAttribute("alt", "Reddit Logo");
+                //newsImg.setAttribute("class", "is-128x128");
+                newsImg.src = "https://image.flaticon.com/icons/png/512/52/52053.png";
+                newsItemImgEl.appendChild(newsImg);
+
                 //Add Container for Title
                 var redditTitleEl = document.createElement("div");
-                redditTitleEl.setAttribute("class", "column");
+                redditTitleEl.setAttribute("class", "column is-10 is-flex is-align-items-center");
                 newsItemEl.append(redditTitleEl);
 
                 // Add Title to specific news container that is hyperlink
