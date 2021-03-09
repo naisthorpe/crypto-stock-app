@@ -238,7 +238,7 @@ function apiSymbolArticle(symbolArt) {
 
                 // Add a show more button to reveal the article in a modal 
                 var showMoreButton = document.createElement("button");
-                showMoreButton.textContent = "Read Article";
+                showMoreButton.textContent = "Read Article Summary";
                 showMoreButton.setAttribute("class", "button");
                 showMoreButton.setAttribute('id', 'show-more-' + i);
                 newsItemContent.appendChild(showMoreButton);
@@ -408,10 +408,17 @@ function getApiRandomNews() {
                 newsItemEl.append(newsItemContent);
 
                 // Add Title and Subtitle to specific news container
-                var newsItemTitle = document.createElement("p");
-                newsItemTitle.setAttribute("class", "title");
+
+                // Add Title and Subtitle to specific news container
+                var newsTitleEl = document.createElement("div");
+                newsItemContent.appendChild(newsTitleEl);
+                
+                var newsItemTitle = document.createElement("a");
+                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("href", data.items.result[i].link);
+                newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.items.result[i].title;
-                newsItemContent.appendChild(newsItemTitle);
+                newsTitleEl.appendChild(newsItemTitle);
 
                 var newsItemSubtitle = document.createElement("p");
                 newsItemSubtitle.setAttribute("class", "subtitle ml-3");
