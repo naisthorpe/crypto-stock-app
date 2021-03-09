@@ -230,6 +230,46 @@ function apiSymbolArticle(symbolArt) {
                     newsItemSubtitle.textContent = data.items.result[i].author;
                 }
                 newsItemContent.appendChild(newsItemSubtitle);
+
+                // Add a show more button to reveal the article in a modal 
+                var showMoreButton = document.createElement("button");
+                showMoreButton.textContent = "Read Article";
+                showMoreButton.setAttribute("class", "button");
+                showMoreButton.setAttribute('id', 'show-more-' + i);
+                newsItemContent.appendChild(showMoreButton);
+
+                
+                var modalBody = document.querySelector(".modal-card-body");
+
+                //Show more button handler
+                showMoreButton.addEventListener("click", function (event) {
+                    modalBody.innerHTML = "";
+                    var idIndex = parseInt(event.target.getAttribute('id').split("-")[2]);
+                    console.log(idIndex);
+
+                    var infoCard = document.createElement("div");
+                    infoCard.classList.add("card");
+
+                    var cardContent = document.createElement("div");
+                    cardContent.classList.add("card-content");
+                    infoCard.appendChild(cardContent);
+
+                    var cardBody = document.createElement("div");
+                    cardBody.classList.add("content");
+                    if (data.items.result[idIndex].content === null){
+                        cardBody.innerHTML = data.items.result[idIndex].summary;
+                    } else {
+                        cardBody.innerHTML = data.items.result[idIndex].content;
+                    }
+                    
+                    cardContent.appendChild(cardBody);
+
+                    modalBody.append(infoCard);
+
+
+
+                    document.querySelector(".modal").classList.add("is-active");
+                })
             }
             getRedditApi(symbolArt);
         })
