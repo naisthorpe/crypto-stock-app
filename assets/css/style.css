@@ -161,16 +161,6 @@ nav ul li:hover ul.sub-nav {
     padding-bottom: 2em;
     
   }
-
-  /* @media screen and (max-width: 637px){
-    .StreamsHero-header{
-      font-size: 22px;
-    }
-    .StreamsHero-blurb {
-      font-size: 15px;
-    }
-  } */
-
   /* Animation Wave Color */
   
   @-webkit-keyframes waveColors {

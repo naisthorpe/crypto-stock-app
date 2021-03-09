@@ -9,9 +9,11 @@
     <script src="https://kit.fontawesome.com/7cd377d9ce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
+
 
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -24,19 +26,20 @@
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
             </a>
+
         </div>
         <div id="nav-menu" class="navbar-menu grey">
-            <a class="navbar-item has-text-black">
+            <a class="navbar-item has-text-black" id="home-button">
                 Home
             </a>
-            <a class="navbar-item has-text-black">
+            <a class="navbar-item has-text-black" id="yahoo-fin-button">
                 Yahoo Finance
             </a>
-            <a class="navbar-item has-text-black">
+            <a class="navbar-item has-text-black" id="bitcoin-button">
                 Bitcoin
             </a>
 
-            <a class="navbar-item has-text-black">
+            <a class="navbar-item has-text-black" id="reddit-button">
                 Reddit
             </a>
 
@@ -50,7 +53,7 @@
                         Cookies & Privacy
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item has-text-black">
+                    <a class="report-issue navbar-item has-text-black">
                         Report an issue
                     </a>
                 </div>
@@ -83,90 +86,100 @@
                     <p class="panel-heading">
                         Search Stocks
                     </p>
-                    <div class="panel-block">
+                    <div class="panel-block is-flex-direction-column">
                         <p class="control has-icons-left">
                             <input id="input" class="input" type="text" placeholder="Ex. GME">
                             <span class="icon is-left">
                                 <i class="fas fa-search" aria-hidden="true"></i>
                             </span>
                         </p>
-                        
-                        <button id="search">Search</button>
-                        
+                       
+                        <button id="search" class="column is-full p-0">Search</button>
                     </div>
+                    
                     <div id="search-history">
                         <p class="panel-tabs">
-                            <a class="is-active">History</a>
-                            <a>Favorites</a>
+                            <a class="history-tab is-active">History</a>
+                            <a class="favorites-tab">Favorites</a>
 
                         </p>
                         <a class="panel-block history-item-container">
                             <span class="panel-icon">
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
-                            <button  id="history-0" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            <button id="history-0"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
                         </a>
                         <a class="panel-block history-item-container">
                             <span class="panel-icon">
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
-                            <button id="history-1" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
-                            
-                        </a>
-                        <a class="panel-block history-item-container">
-                            <span class="panel-icon">
-                                <i class="fas fa-caret-right" aria-hidden="true"></i>
-                            </span>
-                            <button id="history-2" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
-                            
-                        </a>
-                        <a class="panel-block history-item-container">
-                            <span class="panel-icon">
-                                <i class="fas fa-caret-right" aria-hidden="true"></i>
-                            </span>
-                            <button id="history-3" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
-                            
-                        </a>
-                        <a class="panel-block history-item-container">
-                            <span class="panel-icon">
-                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                            </span>
-                            <button id="history-4" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
-                            
-                        </a>
-                        <a class="panel-block history-item-container">
-                            <span class="panel-icon">
-                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
-                            </span>
-                            <button id="history-5" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            <button id="history-1"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
                             <span class="panel-icon">
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
-                            <button id="history-6" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            <button id="history-2"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
                             <span class="panel-icon">
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
-                            <button id="history-7" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
-
-                        </a>
-                        <a class="panel-block history-item-container">
-                            <span class="panel-icon">
-                                <i class="fas fa-caret-right" aria-hidden="true"></i>
-                            </span>
-                            <button id="history-8" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            <button id="history-3"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
                             <span class="panel-icon">
                                 <i class="fas fas fa-caret-right" aria-hidden="true"></i>
                             </span>
-                            <button id="history-9" class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                            <button id="history-4"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-5"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-6"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-7"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-8"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+
+                        </a>
+                        <a class="panel-block history-item-container">
+                            <span class="panel-icon">
+                                <i class="fas fas fa-caret-right" aria-hidden="true"></i>
+                            </span>
+                            <button id="history-9"
+                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                     </div>
@@ -198,9 +211,9 @@
 
 
             </div>
-            
 
-    <!--
+
+            <!--
                 <div class="columns">
                 <div class="column hide" id="stock-container">
 
@@ -223,16 +236,104 @@
             </div>-->
         </div>
 
-        <div class="modal" >
+        <div class="modal">
             <div class="modal-background"></div>
             <div class="modal-card">
-                <header class="modal-card-head">                
+                <header class="modal-card-head">
                     <button class="delete" id="cancel-button" aria-label="close"></button>
                 </header>
                 <section class="modal-card-body"></section>
             </div>
+
         </div>
+
+        <div class="report-modal modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <form id="issue-form">
+                    <header class="modal-card-head is-flex is-justify-content-space-between">
+                        <button class="delete cancel-issue" aria-label="close"></button>
+                        <div>Issues Form</div>
+                        <div></div>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="field">
+                            <label class="label">Name</label>
+                            <div class="control">
+                                <input name="first-name" class="input" type="text" placeholder="Text input">
+                            </div>
+                        </div>
+
+
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input name="email" class="input" type="email" placeholder="Email input">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                            <!-- <p class="help is-danger">This email is invalid</p> -->
+                        </div>
+
+                        <!-- <div class="field">
+                            <label class="label">Subject</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select>
+                                        <option>Stock search</option>
+                                        <option>Load Error</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="field">
+                            <label class="label">Message</label>
+                            <div class="control">
+                                <textarea name="issue-message" type="message" class="textarea" placeholder="Textarea"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- <div class="field">
+                        <div class="control">
+                          <label class="checkbox">
+                            <input type="checkbox">
+                            I agree to the <a href="#">terms and conditions</a>
+                          </label>
+                        </div>
+                      </div> -->
+
+                        <!-- <div class="field">
+                        <div class="control">
+                          <label class="radio">
+                            <input type="radio" name="question">
+                            Yes
+                          </label>
+                          <label class="radio">
+                            <input type="radio" name="question">
+                            No
+                          </label>
+                        </div>
+                      </div> -->
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Submit</button>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+
+
     </div>
+
+
 
 
 
