@@ -221,7 +221,7 @@ function apiSymbolArticle(symbolArt) {
                 newsItemContent.appendChild(newsTitleEl);
                 
                 var newsItemTitle = document.createElement("a");
-                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("class", "title has-text-link is-hovered");
                 newsItemTitle.setAttribute("href", data.items.result[i].link);
                 newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.items.result[i].title;
@@ -327,7 +327,7 @@ function getRedditApi(symbolSearch) {
 
                 // Add Title to specific news container that is hyperlink
                 var newsItemTitle = document.createElement("a");
-                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("class", "title has-text-link is-hovered");
                 newsItemTitle.setAttribute("href", data.data[i].full_link);
                 newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.data[i].title;
@@ -414,7 +414,7 @@ function getApiRandomNews() {
                 newsItemContent.appendChild(newsTitleEl);
                 
                 var newsItemTitle = document.createElement("a");
-                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("class", "title has-text-link is-hovered");
                 newsItemTitle.setAttribute("href", data.items.result[i].link);
                 newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.items.result[i].title;
