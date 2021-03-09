@@ -214,13 +214,18 @@ function apiSymbolArticle(symbolArt) {
                 // Add Container for Title and Subtitle after Figure
                 var newsItemContent = document.createElement("div");
                 newsItemContent.setAttribute("class", "column is-9");
-                newsItemEl.append(newsItemContent);
+                newsItemEl.appendChild(newsItemContent);
 
                 // Add Title and Subtitle to specific news container
-                var newsItemTitle = document.createElement("p");
-                newsItemTitle.setAttribute("class", "title");
+                var newsTitleEl = document.createElement("div");
+                newsItemContent.appendChild(newsTitleEl);
+                
+                var newsItemTitle = document.createElement("a");
+                newsItemTitle.setAttribute("class", "title has-text-link");
+                newsItemTitle.setAttribute("href", data.items.result[i].link);
+                newsItemTitle.setAttribute("target", "_blank");
                 newsItemTitle.textContent = data.items.result[i].title;
-                newsItemContent.appendChild(newsItemTitle);
+                newsTitleEl.appendChild(newsItemTitle);
 
                 var newsItemSubtitle = document.createElement("p");
                 newsItemSubtitle.setAttribute("class", "subtitle ml-3");
