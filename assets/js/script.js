@@ -18,6 +18,7 @@ var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
+
 toggle.addEventListener("click", function () {
     // If the menu is showing
     if (menu.classList.contains("is-active")) {
