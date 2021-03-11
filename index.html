@@ -21,39 +21,39 @@
             <a class="navbar-item" href="https://bulma.io">
                 <img src="https://static.thenounproject.com/png/136700-200.png" width="30" height="28">
             </a>
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" id="nav-toggle">
+            <a role="button" class="navbar-burger header" aria-label="menu" aria-expanded="false" id="nav-toggle">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
             </a>
 
         </div>
-        <div id="nav-menu" class="navbar-menu grey">
-            <a class="navbar-item has-text-black" id="home-button">
+        <div id="nav-menu" class="navbar-menu grey navmenu">
+            <a class="navbar-item colorDifferent" id="home-button">
                 Home
             </a>
-            <a class="navbar-item has-text-black" id="yahoo-fin-button">
+            <a class="navbar-item colorDifferent" id="yahoo-fin-button">
                 Yahoo Finance
             </a>
-            <a class="navbar-item has-text-black" id="bitcoin-button">
+            <a class="navbar-item colorDifferent" id="bitcoin-button">
                 Bitcoin
             </a>
 
-            <a class="navbar-item has-text-black" id="reddit-button">
+            <a class="navbar-item colorDifferent" id="reddit-button">
                 Reddit
             </a>
 
-            <div id="nav-more" class="navbar-item has-text-black has-dropdown is-hoverable">
-                <a class="navbar-link has-text-black">
+            <div id="nav-more" class="navbar-item  has-dropdown is-hoverable">
+                <a class="navbar-link colorDifferent">
                     More
                 </a>
 
-                <div class="navbar-dropdown is-hidden" id="nav-dropdown">
-                    <a class="cookies navbar-item has-text-black">
+                <div class="navbar-dropdown " id="nav-dropdown">
+                    <a class="cookies navbar-item black colorDifferent">
                         Cookies & Privacy
                     </a>
-                    <hr class="navbar-divider">
-                    <a class="report-issue navbar-item has-text-black">
+                    <hr class="navbar-divider colorDifferent ">
+                    <a class="report-issue navbar-item black colorDifferent ">
                         Report an issue
                     </a>
                 </div>
@@ -66,10 +66,10 @@
     <!-- Hero Banner -->
     <section class="hero">
         <div class="hero-body StreamsHero-image">
-            <p class="title has-text-white has-text-centered">
+            <p class="title  has-text-centered head">
                 Platform Where You Can Find Stock Information
             </p>
-            <p class="subtitle has-text-white has-text-centered">
+            <p class="subtitle  has-text-centered head">
                 Search to get relevant articles and Reddit posts
             </p>
         </div>
@@ -82,21 +82,21 @@
     <div class="column">
         <div class="columns">
             <div class="column is-2">
-                <nav class="panel">
-                    <p class="panel-heading">
+                <nav class="panel panelBorder">
+                    <p class="panelHeading">
                         Search Stocks
                     </p>
-                    <div class="panel-block is-flex-direction-column">
+                    <div class="panel-block is-flex-direction-column panel">
                         <p class="control has-icons-left">
                             <input id="input" class="input" type="text" placeholder="Ex. GME">
                             <span class="icon is-left">
                                 <i class="fas fa-search" aria-hidden="true"></i>
                             </span>
                         </p>
-                        
-                        <button id="search" class="column is-full p-0">Search</button>
+
+                        <button id="search" class="column is-full p-0 BtnColor">Search</button>
                     </div>
-                    
+
                     <div id="search-history">
                         <p class="panel-tabs">
                             <a class="history-tab is-active">History</a>
@@ -104,18 +104,18 @@
 
                         </p>
                         <a class="panel-block history-item-container">
-                            <span class="panel-icon">
+                            <span class="panel-icon ">
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-0"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
                         </a>
                         <a class="panel-block history-item-container">
                             <span class="panel-icon">
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-1"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -123,7 +123,7 @@
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-2"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -131,7 +131,7 @@
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-3"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -139,7 +139,7 @@
                                 <i class="fas fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-4"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold is-hoverable"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -147,7 +147,7 @@
                                 <i class="fas fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-5"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -155,7 +155,7 @@
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-6"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -163,7 +163,7 @@
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-7"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -171,7 +171,7 @@
                                 <i class="fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-8"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                         <a class="panel-block history-item-container">
@@ -179,12 +179,12 @@
                                 <i class="fas fas fa-caret-right" aria-hidden="true"></i>
                             </span>
                             <button id="history-9"
-                                class="history-element button is-small is-fullwidth has-text-weight-bold"></button>
+                                class="history-element button is-small  is-rounded is-fullwidth has-text-weight-bold"></button>
 
                         </a>
                     </div>
                     <div class="panel-block">
-                        <button id="clear-history-btn" class="button is-link is-outlined is-fullwidth">
+                        <button id="clear-history-btn" class="button is-link is-fullwidth ButtonColor">
                             Clear Local History
                         </button>
                     </div>
@@ -194,46 +194,8 @@
             </div>
             <!-- Stock Articles and stock info for now...... need to move stock info to another page orrrrr articles will go on another page -->
             <div id="content" class="column is-10">
-                <!--
-                    
-                <article class="card columns">
-                    <figure class="column is-3">
-                        <img></img>
-                    </figure>
-                    <div class="column is-9">
-                        <p class="title"></p>
-                        <p class="subtitle"></p>
-                        <button class="button">Read Article</button>
-                    </div>
-                </article>
-
-                -->
-
-
             </div>
 
-
-            <!--
-                <div class="columns">
-                <div class="column hide" id="stock-container">
-
-                    <div id="stock-info" class="column has-background-grey is-flex is-flex-direction-column">
-                    </div>
-
-
-                    <div id="stock-news-links" class="column has-background-grey is-flex is-flex-direction-row" style="margin-left: 100px; margin-top: 100px; margin-right: 100px;">
-                        <div id="article-picture" class="is-one-fifth"></div>
-                        <div id="article-href-links" class="is-four-fifths"></div>
-                    </div>
-
-                    <div id="reddit-stock-articles" class="column has-background-grey"">
-
-
-                    </div>
-                </div>
-                <div id="articles-content" class="column is-justify-content-center"></div>
-
-            </div>-->
         </div>
 
         <div class="modal">
@@ -252,15 +214,13 @@
             <div class="modal-card">
                 <header class="modal-card-head">
                     <button class="delete cancel-button-cookie" aria-label="close"></button>
-                </header>                
+                </header>
                 <section class="modal-card-body">
-                    <img
-                    style="width: 1000px; height: 650px;"
-                    src="https://user-images.githubusercontent.com/76064269/110413495-f96d4800-805b-11eb-858b-16bef5149034.gif"
-                    data-animate="https://user-images.githubusercontent.com/76064269/110413495-f96d4800-805b-11eb-858b-16bef5149034.gif"
-                    />
+                    <img style="width: 1000px; height: 650px;"
+                        src="https://user-images.githubusercontent.com/76064269/110413495-f96d4800-805b-11eb-858b-16bef5149034.gif"
+                        data-animate="https://user-images.githubusercontent.com/76064269/110413495-f96d4800-805b-11eb-858b-16bef5149034.gif" />
                 </section>
-                
+
             </div>
 
         </div>
@@ -269,7 +229,7 @@
             <div class="modal-background"></div>
             <div class="modal-card">
                 <form id="issue-form">
-                    <header class="modal-card-head is-flex is-justify-content-space-between">
+                    <header class="modal-card-head is-flex is-justify-content-space-between IssueColor">
                         <button class="delete cancel-issue" aria-label="close"></button>
                         <div>Issues Form</div>
                         <div></div>
@@ -294,49 +254,20 @@
                                     <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                             </div>
-                            <!-- <p class="help is-danger">This email is invalid</p> -->
+
                         </div>
 
-                        <!-- <div class="field">
-                            <label class="label">Subject</label>
-                            <div class="control">
-                                <div class="select">
-                                    <select>
-                                        <option>Stock search</option>
-                                        <option>Load Error</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> -->
+
 
                         <div class="field">
                             <label class="label">Message</label>
                             <div class="control">
-                                <textarea name="issue-message" type="message" class="textarea" placeholder="Textarea"></textarea>
+                                <textarea name="issue-message" type="message" class="textarea"
+                                    placeholder="Textarea"></textarea>
                             </div>
                         </div>
 
-                        <!-- <div class="field">
-                        <div class="control">
-                          <label class="checkbox">
-                            <input type="checkbox">
-                            I agree to the <a href="#">terms and conditions</a>
-                          </label>
-                        </div>
-                      </div> -->
 
-                        <!-- <div class="field">
-                        <div class="control">
-                          <label class="radio">
-                            <input type="radio" name="question">
-                            Yes
-                          </label>
-                          <label class="radio">
-                            <input type="radio" name="question">
-                            No
-                          </label>
-                        </div>
-                      </div> -->
 
                         <div class="field is-grouped">
                             <div class="control">
