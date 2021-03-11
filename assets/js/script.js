@@ -7,7 +7,6 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "2de27e6d68mshc925b4db1c6ffd4p149673jsn497cb6662b48";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
@@ -16,6 +15,8 @@ var moreDropdown = document.querySelector("#nav-dropdown");
 
 var stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
 var stockSymbol;
+
+var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
 
 toggle.addEventListener("click", function () {
     // If the menu is showing
@@ -61,10 +62,7 @@ redditButton.addEventListener("click", function () {
 
 getApiRandomNews();
 
-//-------------------------------------link search to articles by symbol or label-------------------------------------------------------------------------------
-//-------------------------------------attach .entities[i].label or term----------------------------------------------------------------------------------------
 
-//searches for symbol of stock------------------quoteType and go splice the 2 words so you dont have to search corporation or whatever other word at the end?????????????????
 function getApi(symbol) {
 
     fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol=${symbol}&region=US`, {
@@ -119,8 +117,7 @@ function getApi(symbol) {
             // adding stats div for stats to create columns
             var statColumnDiv = document.createElement("div");
             statColumnDiv.classList.add("columns", "is-flex", "is-justify-content-space-around", "m-0");
-            stockInfoEl.appendChild(statColumnDiv);
-            
+            stockInfoEl.appendChild(statColumnDiv);            
 
             // Add symbol full name 
             var fullSymbolName = document.createElement("p");
@@ -129,8 +126,6 @@ function getApi(symbol) {
 
             fullSymbolName.textContent = `${data.quoteType.longName} (${data.symbol})`;
             symbolTitleDiv.appendChild(fullSymbolName);
-
-
 
             // Add stock price
             var price = document.createElement("p");
@@ -143,6 +138,23 @@ function getApi(symbol) {
             fifty2WeekHigh.classList.add("column", "is-two-fifth", "m-0","has-text-centered", "has-text-weight-bold");
             fifty2WeekHigh.textContent = `52 High: $${data.summaryDetail.fiftyTwoWeekHigh.raw}`;
             statColumnDiv.appendChild(fifty2WeekHigh);
+
+            // new div for stock stats
+            var statColumnDivTwo = document.createElement("div");
+            statColumnDivTwo.classList.add("columns", "is-flex", "is-justify-content-space-around", "m-0");
+            stockInfoEl.appendChild(statColumnDivTwo);
+
+            // $ market change
+            var market$Change = document.createElement("p");
+            market$Change.classList.add("column", "is-two-fifth", "m-0","has-text-centered", "has-text-weight-bold");
+            market$Change.textContent = `Market Change: $${data.price.regularMarketChange.fmt}`;
+            statColumnDivTwo.appendChild(market$Change);
+
+            if(data.price.regularMarketChange.fmt < "0.00") {    
+                market$Change.setAttribute("style", "color: red;");
+            } else {
+                market$Change.setAttribute("style", "color: green;")
+            }
 
             // Add 52 week low
             var fifty2WeekLow = document.createElement("p");
@@ -348,17 +360,6 @@ function getRedditApi(symbolSearch) {
                 newsItemTitle.textContent = data.data[i].title;
                 redditTitleEl.appendChild(newsItemTitle);
 
-                /*
-                //Add container for author
-                var redditAuthorEl = document.createElement("div");
-                redditAuthorEl.setAttribute("class", "column");
-                newsItemEl.append(redditAuthorEl);
-
-                var newsItemSubtitle = document.createElement("p");
-                newsItemSubtitle.setAttribute("class", "subtitle ml-3");
-                newsItemSubtitle.textContent = `${data.data[i].selftext}`;
-                redditAuthorEl.appendChild(newsItemSubtitle);
-                */
             }
 
         })
@@ -495,37 +496,7 @@ function getApiRandomNews() {
         })
 }
 
-// ------------------------------------------------------------------------
-
-var historyTab = document.querySelector(".history-tab");
-var favorites = document.querySelector(".favorites-tab");
-
-favorites.addEventListener("click", function () {
-    historyTab.classList.remove("is-active");
-    favorites.classList.add("is-active");
-    // favoritesList();
-});
-
-historyTab.addEventListener("click", function () {
-    favorites.classList.remove("is-active");
-    historyTab.classList.add("is-active");
-    init();
-});
-
-// function favoritesList() {
-//     for (var i = 0; i < stockSymbolArray.length; i++){
-//         // var historyElementList = 
-//         // document.getElementById(`history-${i}`).innerHTML = "";
-//         // historyElementList.innerHTML = "";
-//         // historyElementList.value = "";
-
-//     }
-// };
-
-
-
-//-------------------------------------------------------------------------
-
+// handles the issues form submit
 var reportIssue = document.querySelector(".report-issue");
 var reportModal = document.querySelector(".report-modal");
 var cancelIssue = document.querySelector(".cancel-issue");
@@ -555,9 +526,9 @@ function handleFormSubmit(event) {
 }
 
 formEl.on('submit', handleFormSubmit);
+ 
 
-// ------------------------------------------------------------------------
-
+// handles cookies ;)
 var cookies = document.querySelector(".cookies");
 var cookieMonster = document.querySelector(".cookie-monster");
 var cancelCookie = document.querySelector(".cancel-button-cookie");
@@ -570,10 +541,9 @@ cancelCookie.addEventListener("click", function(){
     cookieMonster.classList.remove("is-active");
 });
 
-// ------------------------------------------------------------------------
 
+// renders the stock history 
 function renderStockHistory() {
-    //searchHistoryEl.empty();
 
     for (var i = 0; i < stockSymbolArray.length; i++) {
         var searchHistoryEl = document.getElementById(`history-${i}`);
@@ -589,7 +559,6 @@ searchBtn.addEventListener("click", searchClickHandler);
 function searchClickHandler(event) {
     event.preventDefault();
     var searchStock = input.value;
-    //articleContent.classList.add("hide");
 
     if (searchStock === "") {
         return;
