@@ -7,10 +7,13 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
+<<<<<<< HEAD
 var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
+=======
+>>>>>>> 058ffd821acec77f1539b1743eb2ec8575ec40c2
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
 
@@ -18,7 +21,10 @@ var stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "S
 var stockSymbol;
 
 var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
-
+var toggle = document.querySelector("#nav-toggle");
+var menu = document.querySelector("#nav-menu");
+var moreBtn = document.querySelector("#nav-more");
+var moreDropdown = document.querySelector("#nav-dropdown");
 toggle.addEventListener("click", function () {
     // If the menu is showing
     if (menu.classList.contains("is-active")) {
