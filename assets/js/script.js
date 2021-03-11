@@ -7,13 +7,6 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-<<<<<<< HEAD
-var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
-=======
->>>>>>> e4d003b8943b245edc78f840b55471a2251869de
-
-var toggle = document.querySelector("#nav-toggle");
-var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
 
@@ -121,12 +114,8 @@ function getApi(symbol) {
             // adding stats div for stats to create columns
             var statColumnDiv = document.createElement("div");
             statColumnDiv.classList.add("columns", "is-flex", "is-justify-content-space-around", "m-0");
-<<<<<<< HEAD
             stockInfoEl.appendChild(statColumnDiv);
 
-=======
-            stockInfoEl.appendChild(statColumnDiv);            
->>>>>>> e4d003b8943b245edc78f840b55471a2251869de
 
             // Add symbol full name 
             var fullSymbolName = document.createElement("p");
@@ -155,11 +144,11 @@ function getApi(symbol) {
 
             // $ market change
             var market$Change = document.createElement("p");
-            market$Change.classList.add("column", "is-two-fifth", "m-0","has-text-centered", "has-text-weight-bold");
+            market$Change.classList.add("column", "is-two-fifth", "m-0", "has-text-centered", "has-text-weight-bold");
             market$Change.textContent = `Market Change: $${data.price.regularMarketChange.fmt}`;
             statColumnDivTwo.appendChild(market$Change);
 
-            if(data.price.regularMarketChange.fmt < "0.00") {    
+            if (data.price.regularMarketChange.fmt < "0.00") {
                 market$Change.setAttribute("style", "color: red;");
             } else {
                 market$Change.setAttribute("style", "color: green;")
@@ -535,7 +524,7 @@ function handleFormSubmit(event) {
 }
 
 formEl.on('submit', handleFormSubmit);
- 
+
 
 // handles cookies ;)
 var cookies = document.querySelector(".cookies");
