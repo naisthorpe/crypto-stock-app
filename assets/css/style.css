@@ -15,7 +15,9 @@ body, html {
 .colorDifferent{
   color:black!important;
   background-color: #909090!important;
-  
+}
+.border{
+  border: 1px  solid blue;
 }
 /* text color*/
 .colorDifferent:hover{
@@ -27,7 +29,7 @@ body, html {
   width: 100%;
   height: 75px;
   background-color: #909090!important;
-  border-bottom: 1px solid blue;
+  border-bottom: 2px solid blue;
   top: 0;
   left: 0;
   z-index: 999;
