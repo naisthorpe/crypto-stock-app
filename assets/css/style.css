@@ -12,6 +12,10 @@ body, html {
   display: none;
 }
 
+#search:hover {
+  opacity: .6;
+}
+
 .colorDifferent{
   color:black!important;
   background-color: #909090!important;
@@ -43,117 +47,117 @@ body, html {
 .IssueColor{
   background-color: lightskyblue!important;
 }
-  .BtnColor{
-    background-color: #3273dc;
-    color:white;
-    border-radius: 4px;
-    display: block;
-    flex-basis: 0;
-    flex-grow: 1;
-    flex-shrink: 1;
-    padding: 10px 24px;
-   
-  }
-  .panelHeading{
-    background-color:#909090!important;
-    color:black!important;
-    border-radius: 6px 6px 0 0;
-    font-size: 1.25em;
-    line-height: 1.25;
-    padding: .75em 1em;
-  }
-  .panel-icon{
-    display: inline-block;
-    font-size: 14px;
-    height: 1em;
-    line-height: 1em;
-    text-align: center;
-    vertical-align: top;
-    width: 1em;
-    color: #3273dc!important;
-    margin-right: .75em;
-  }
+.BtnColor{
+  background-color: #3273dc;
+  color:white;
+  border-radius: 4px;
+  display: block;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 10px 24px;
   
+}
+.panelHeading{
+  background-color:#909090!important;
+  color:black!important;
+  border-radius: 6px 6px 0 0;
+  font-size: 1.25em;
+  line-height: 1.25;
+  padding: .75em 1em;
+}
+.panel-icon{
+  display: inline-block;
+  font-size: 14px;
+  height: 1em;
+  line-height: 1em;
+  text-align: center;
+  vertical-align: top;
+  width: 1em;
+  color: #3273dc!important;
+  margin-right: .75em;
+}
+
 .StreamsHero-image {
-    /* Wave Color */
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 350% 350%;
-    animation: waveColors 30s ease infinite;
-    /* End Wave Color */
+  /* Wave Color */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 350% 350%;
+  animation: waveColors 30s ease infinite;
+  /* End Wave Color */
    
   }
  /* icon left coner top on the header*/
-  .grey {
-    background-color:#909090;
-    border-bottom: 1px solid #3273dc;
+.grey {
+  background-color:#909090;
+  border-bottom: 1px solid #3273dc;
     
-  }
-  
-  .hero-color {
-    color: #fff;
-    font-weight: 200;
-    line-height: 48px;
-    margin-bottom: -5px;
-    font-size: 32px;
-    background-size: cover;
-    width: 100%;
-    max-height: 100px;
-    margin-top: 100px;
-  }
-  
-  .StreamsHero-blurb {
-    color: #fff;
-    font-size: 25px;
-    font-weight: 200;
-    line-height: 35px;
-    opacity: .7;
-    
-    transition: opacity 300ms linear;
-    padding-bottom: 2em;
-    
-  }
-  /* Animation Wave Color */
-  
-  @-webkit-keyframes waveColors {
-    0% {
-      background-position: 0% 7%;
-    }
-    50% {
-      background-position: 100% 94%;
-    }
-    100% {
-      background-position: 0% 7%;
-    }
-  }
-  
-  @keyframes waveColors {
-    0% {
-      background-position: 0% 7%;
-    }
-    50% {
-      background-position: 100% 94%;
-    }
-    100% {
-      background-position: 0% 7%;
-    }
-  }
+}
 
-  /* End Animation Wave Color */
+.hero-color {
+  color: #fff;
+  font-weight: 200;
+  line-height: 48px;
+  margin-bottom: -5px;
+  font-size: 32px;
+  background-size: cover;
+  width: 100%;
+  max-height: 100px;
+  margin-top: 100px;
+}
+
+.StreamsHero-blurb {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 200;
+  line-height: 35px;
+  opacity: .7;
+  
+  transition: opacity 300ms linear;
+  padding-bottom: 2em;
+  
+}
+/* Animation Wave Color */
+
+@-webkit-keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
+
+@keyframes waveColors {
+  0% {
+    background-position: 0% 7%;
+  }
+  50% {
+    background-position: 100% 94%;
+  }
+  100% {
+    background-position: 0% 7%;
+  }
+}
+
+/* End Animation Wave Color */
 
 
 /*animated Paragraph*/
-  .head{
-    color:white!important;
-   text-shadow: 2px 2px 4px #000000;
-  
-    animation: animate 2s 1;
+.head{
+  color:white!important;
+  text-shadow: 2px 2px 4px #000000;
+
+  animation: animate 2s 1;
+}
+@keyframes animate{
+  0%{
+    transform: scale(0)
   }
-  @keyframes animate{
-    0%{
-      transform: scale(0)
-    }
-    100%{
-      transform: scale(1)
-    }
-  
+  100%{
+    transform: scale(1)
   }
+
+}
