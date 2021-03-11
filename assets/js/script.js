@@ -86,7 +86,6 @@ function getApi(symbol) {
             // Create container for stock articles
             var stockItemEl = document.createElement("article");
             stockItemEl.classList.add("card", "columns", "mt-2", "mb-2");
-            //stockItemEl.setAttribute("data-index", i);
             newsContent.appendChild(stockItemEl);
 
             // Create figure for stock image
