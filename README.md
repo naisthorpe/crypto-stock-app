@@ -40,6 +40,7 @@ THEN page displayed me last topic for the certain article
 ```
 
 ## Illustrations
+![cookie monster gif](https://user-images.githubusercontent.com/76064269/111012791-2aef5780-836b-11eb-9a4e-0d9a6eb9c284.gif)
 
 ![Gif](## gif of our page)
 
