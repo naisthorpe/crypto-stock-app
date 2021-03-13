@@ -7,12 +7,6 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
-
-var toggle = document.querySelector("#nav-toggle");
-var menu = document.querySelector("#nav-menu");
-var moreBtn = document.querySelector("#nav-more");
-var moreDropdown = document.querySelector("#nav-dropdown");
 
 var stockSymbolArray = JSON.parse(window.localStorage.getItem("stock-history")) || ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
 var symbolArrayNoDups = [];
@@ -28,7 +22,7 @@ function checkForDuplicates() {
 
 var stockSymbol;
 
-var financeApiKey = "7c0625d48bmshaad16fb803eeafdp1de1e9jsn69348206a4af";
+var financeApiKey = "9c46305eb2msh2e78915b51c226dp132c2cjsna05a1eb88d46";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
