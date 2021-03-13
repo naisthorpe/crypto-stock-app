@@ -665,7 +665,7 @@ function searchClickHandler(event) {
 // Clear local storage button functionality 
 function clearHistory() {
     localStorage.clear();
-    storedStockSymbols = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
+    stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
     renderStockHistory();
 }
 
