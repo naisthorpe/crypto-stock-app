@@ -15,7 +15,7 @@ var symbolArrayNoDups = [];
 
 function checkForDuplicates() {
     symbolArrayNoDups = [];
-    for (var i=0; i<stockSymbolArray.length; i++) {
+    for (var i = 0; i < stockSymbolArray.length; i++) {
         if (symbolArrayNoDups.indexOf(stockSymbolArray[i]) == -1) {
             symbolArrayNoDups.push(stockSymbolArray[i]);
         }
@@ -24,7 +24,7 @@ function checkForDuplicates() {
 
 var stockSymbol;
 
-var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
+var financeApiKey = "7c0625d48bmshaad16fb803eeafdp1de1e9jsn69348206a4af";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
@@ -197,9 +197,13 @@ function getApi(symbol) {
 
             // Store history list locally          
             localStorage.setItem("stock-history", JSON.stringify(symbolArrayNoDups));
-            
+
 
             // Render the history list on the page
+            chart(symbol);
+
+
+            
             renderStockHistory();
             apiSymbolArticle(symbol);
 
@@ -208,6 +212,77 @@ function getApi(symbol) {
 }
 
 
+function chart(symbolChart) {
+
+
+
+    fetch(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-charts?symbol=${symbolChart}&interval=5m&range=1d&region=US&comparisons=%5EGDAXI%2C%5EFCHI`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": `${financeApiKey}`,
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com"
+        }
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            var canvasTag = $(`
+        <canvas id="myChart"></canvas>
+        `)
+            canvasTag.attr("style", "max-height: 500px; max-width: 500px; width: 100%; height: 100%; margin: auto;")
+            // var chartDiv = document.createElement("div");
+            // chartDiv.setAttribute("style")
+            $("#content").prepend(canvasTag);
+        
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart;
+            // mychart.canvas.style.height = '128px';
+            for (var i = 0; i < 109; i++) {
+                // console.log(data.chart.result[0].timestamp[i]);
+                var time = new Date(data.chart.result[0].timestamp[i] * 1000);
+                console.log(time);
+                console.log(data.chart.result[0].indicators.quote[0].high[i]);
+                myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels:
+                            ["9:30a.m", "10:00a.m", "11:00a.m", "12:00p.m", "1:00p.m", "2:00p.m", "3:00p.m", "4:00p.m"]
+                            ,
+                        datasets: [{
+                            label: data.chart.result[0].meta.symbol + " Price",
+                            data: [data.chart.result[0].indicators.quote[0].high[0],
+                            data.chart.result[0].indicators.quote[0].high[6],
+                            data.chart.result[0].indicators.quote[0].high[18],
+                            data.chart.result[0].indicators.quote[0].high[30],
+                            data.chart.result[0].indicators.quote[0].high[42],
+                            data.chart.result[0].indicators.quote[0].high[54],
+                            data.chart.result[0].indicators.quote[0].high[66],
+                            data.chart.result[0].indicators.quote[0].high[77]],
+                            fill: true,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {                        
+                        scales: {                            
+                            responsive: false [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });;
+            }
+
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
 
 // This gets articles from Yahoo Finance relevant to the symbol searched and displays 5 articles
 function apiSymbolArticle(symbolArt) {
@@ -627,8 +702,8 @@ function init() {
     } else {
         stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
     }
-    
-    
+
+
 
     // then render the history
     renderStockHistory();
