@@ -39,6 +39,7 @@ WHEN I click the read article button
 THEN page displayed me last topic for the certain article
 ```
 
+
 ## Site Screenshot
 
 ![Site Screenshot](assets/images/site-screenshot.gif)
