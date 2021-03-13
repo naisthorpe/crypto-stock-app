@@ -7,10 +7,6 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "4430ef7fa8msh7517635856fe9c9p13bd27jsna96d1131bc83";
-
-var toggle = document.querySelector("#nav-toggle");
-var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
 
