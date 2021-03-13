@@ -7,7 +7,7 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
+var financeApiKey = "4430ef7fa8msh7517635856fe9c9p13bd27jsna96d1131bc83";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
@@ -27,13 +27,6 @@ function checkForDuplicates() {
 }
 
 var stockSymbol;
-
-var financeApiKey = "7c0625d48bmshaad16fb803eeafdp1de1e9jsn69348206a4af";
-
-var toggle = document.querySelector("#nav-toggle");
-var menu = document.querySelector("#nav-menu");
-var moreBtn = document.querySelector("#nav-more");
-var moreDropdown = document.querySelector("#nav-dropdown");
 
 toggle.addEventListener("click", function () {
     // If the menu is showing
@@ -207,7 +200,7 @@ function getApi(symbol) {
             chart(symbol);
 
 
-            
+
             renderStockHistory();
             apiSymbolArticle(symbol);
 
@@ -239,7 +232,7 @@ function chart(symbolChart) {
             // var chartDiv = document.createElement("div");
             // chartDiv.setAttribute("style")
             $("#content").prepend(canvasTag);
-        
+
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart;
             // mychart.canvas.style.height = '128px';
@@ -253,7 +246,7 @@ function chart(symbolChart) {
                     data: {
                         labels:
                             ["9:30a.m", "10:00a.m", "11:00a.m", "12:00p.m", "1:00p.m", "2:00p.m", "3:00p.m", "4:00p.m"]
-                            ,
+                        ,
                         datasets: [{
                             label: data.chart.result[0].meta.symbol + " Price",
                             data: [data.chart.result[0].indicators.quote[0].high[0],
@@ -270,9 +263,9 @@ function chart(symbolChart) {
                             borderWidth: 1
                         }]
                     },
-                    options: {                        
-                        scales: {                            
-                            responsive: false [{
+                    options: {
+                        scales: {
+                            responsive: false[{
                                 ticks: {
                                     beginAtZero: true
                                 }
