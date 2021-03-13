@@ -7,6 +7,7 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
+
 var financeApiKey = "9c46305eb2msh2e78915b51c226dp132c2cjsna05a1eb88d46";
 
 var toggle = document.querySelector("#nav-toggle");
@@ -200,7 +201,7 @@ function getApi(symbol) {
             chart(symbol);
 
 
-            
+
             renderStockHistory();
             apiSymbolArticle(symbol);
 
@@ -232,21 +233,21 @@ function chart(symbolChart) {
             // var chartDiv = document.createElement("div");
             // chartDiv.setAttribute("style")
             $("#content").prepend(canvasTag);
-        
+
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart;
             // mychart.canvas.style.height = '128px';
             for (var i = 0; i < 109; i++) {
                 // console.log(data.chart.result[0].timestamp[i]);
                 var time = new Date(data.chart.result[0].timestamp[i] * 1000);
-                console.log(time);
-                console.log(data.chart.result[0].indicators.quote[0].high[i]);
+                // console.log(time);
+                // console.log(data.chart.result[0].indicators.quote[0].high[i]);
                 myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels:
                             ["9:30a.m", "10:00a.m", "11:00a.m", "12:00p.m", "1:00p.m", "2:00p.m", "3:00p.m", "4:00p.m"]
-                            ,
+                        ,
                         datasets: [{
                             label: data.chart.result[0].meta.symbol + " Price",
                             data: [data.chart.result[0].indicators.quote[0].high[0],
@@ -263,9 +264,9 @@ function chart(symbolChart) {
                             borderWidth: 1
                         }]
                     },
-                    options: {                        
-                        scales: {                            
-                            responsive: false [{
+                    options: {
+                        scales: {
+                            responsive: false[{
                                 ticks: {
                                     beginAtZero: true
                                 }
@@ -363,10 +364,11 @@ function apiSymbolArticle(symbolArt) {
 
 
                 var modalBody = document.querySelector(".modal-card-body");
-
+                // var modalTop = document.querySelector("#modal-top");
                 //Show more button handler
                 showMoreButton.addEventListener("click", function (event) {
                     modalBody.innerHTML = "";
+                    modalBody.scrollTop = 0;
                     var idIndex = parseInt(event.target.getAttribute('id').split("-")[2]);
                     console.log(idIndex);
 
@@ -572,17 +574,13 @@ function getApiRandomNews() {
                     document.querySelector(".modal").classList.add("is-active");
                 })
 
-
             }
-
-
-
 
             var cancelButton = document.querySelector("#cancel-button");
 
             cancelButton.addEventListener("click", function (event) {
                 document.querySelector(".modal").classList.remove("is-active");
-
+                
             })
         })
 }
