@@ -7,7 +7,7 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-var financeApiKey = "4430ef7fa8msh7517635856fe9c9p13bd27jsna96d1131bc83";
+var financeApiKey = "9c46305eb2msh2e78915b51c226dp132c2cjsna05a1eb88d46";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
