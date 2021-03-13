@@ -7,24 +7,34 @@ var newsContent = document.getElementById("content");
 var clearLocalHistoryBtn = document.querySelector("#clear-history-btn");
 var historyElement = document.getElementById("search-history");
 
-<<<<<<< HEAD
 var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
 
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
-=======
->>>>>>> 058ffd821acec77f1539b1743eb2ec8575ec40c2
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
 
-var stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
+var stockSymbolArray = JSON.parse(window.localStorage.getItem("stock-history")) || ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
+var symbolArrayNoDups = [];
+
+function checkForDuplicates() {
+    symbolArrayNoDups = [];
+    for (var i = 0; i < stockSymbolArray.length; i++) {
+        if (symbolArrayNoDups.indexOf(stockSymbolArray[i]) == -1) {
+            symbolArrayNoDups.push(stockSymbolArray[i]);
+        }
+    }
+}
+
 var stockSymbol;
 
 var financeApiKey = "33aedf4541msh150e22693ddab3ap11c2bdjsn7ac4d60bbd8e";
+
 var toggle = document.querySelector("#nav-toggle");
 var menu = document.querySelector("#nav-menu");
 var moreBtn = document.querySelector("#nav-more");
 var moreDropdown = document.querySelector("#nav-dropdown");
+
 toggle.addEventListener("click", function () {
     // If the menu is showing
     if (menu.classList.contains("is-active")) {
@@ -96,7 +106,6 @@ function getApi(symbol) {
             // Create container for stock articles
             var stockItemEl = document.createElement("article");
             stockItemEl.classList.add("card", "columns", "mt-2", "mb-2");
-            //stockItemEl.setAttribute("data-index", i);
             newsContent.appendChild(stockItemEl);
 
             // Create figure for stock image
@@ -184,11 +193,15 @@ function getApi(symbol) {
 
             // Add symbol to front of history list
             stockSymbolArray.unshift(data.symbol);
-            stockSymbolArray.pop();
+
             console.log(stockSymbolArray);
 
+            checkForDuplicates();
+            console.log(symbolArrayNoDups);
+
             // Store history list locally          
-            localStorage.setItem("stock-history", JSON.stringify(stockSymbolArray));
+            localStorage.setItem("stock-history", JSON.stringify(symbolArrayNoDups));
+
 
             // Render the history list on the page
             renderStockHistory();
@@ -197,6 +210,8 @@ function getApi(symbol) {
         })
 
 }
+
+
 
 // This gets articles from Yahoo Finance relevant to the symbol searched and displays 5 articles
 function apiSymbolArticle(symbolArt) {
@@ -553,9 +568,11 @@ cancelCookie.addEventListener("click", function () {
 // renders the stock history 
 function renderStockHistory() {
 
-    for (var i = 0; i < stockSymbolArray.length; i++) {
+    checkForDuplicates();
+
+    for (var i = 0; i < 10; i++) {
         var searchHistoryEl = document.getElementById(`history-${i}`);
-        searchHistoryEl.textContent = stockSymbolArray[i];
+        searchHistoryEl.textContent = symbolArrayNoDups[i];
         searchHistoryEl.setAttribute("data-index", i);
     }
 }
@@ -573,13 +590,14 @@ function searchClickHandler(event) {
     }
 
     input.value = "";
+
     getApi(searchStock);
 }
 
 // Clear local storage button functionality 
 function clearHistory() {
     localStorage.clear();
-    stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
+    storedStockSymbols = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
     renderStockHistory();
 }
 
@@ -591,7 +609,7 @@ function getHistoryItemInfo(event) {
 
     if (element.matches("button") === true) {
         var historyIndex = element.getAttribute("data-index");
-        historySymbol = stockSymbolArray[historyIndex];
+        historySymbol = symbolArrayNoDups[historyIndex];
 
         getApi(historySymbol);
     }
@@ -599,15 +617,22 @@ function getHistoryItemInfo(event) {
 
 }
 
+var storedStockSymbols = [];
+
 function init() {
 
     // get symbols from local storage
-    var storedStockSymbols = JSON.parse(localStorage.getItem("stock-history"));
+    storedStockSymbols = JSON.parse(localStorage.getItem("stock-history"));
 
     // if local storage not empty
     if (storedStockSymbols !== null) {
         stockSymbolArray = storedStockSymbols;
+        checkForDuplicates();
+    } else {
+        stockSymbolArray = ["GME", "FB", "AAPL", "GE", "F", "BAC", "AMD", "MSFT", "SPCE", "GOOG"];
     }
+
+
 
     // then render the history
     renderStockHistory();
