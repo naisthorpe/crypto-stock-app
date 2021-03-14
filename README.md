@@ -39,14 +39,15 @@ WHEN I click the read article button
 THEN page displayed me last topic for the certain article
 ```
 
-## Illustrations
 
-![Gif](## gif of our page)
+## Site Screenshot
+
+![Site Screenshot](assets/images/site-screenshot.gif)
 
 ## Sources
 
-- Yahoo finance API https://apidojo-yahoo-finance-v1.p.rapidapi.com
-- Reddit API https://api.pushshift.io/reddit/submission/search?q=${symbolSearch}&subreddit=investing
+- Yahoo finance API https://rapidapi.com/apidojo/api/yahoo-finance1
+- Reddit API https://pushshift.io/api-parameters/
 
 ## Additional:
 - Logo for Reddit Stock App https://www.uplead.com/
